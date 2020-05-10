@@ -2,10 +2,16 @@ package de.hskl.model;
 
 import processing.core.PApplet;
 import processing.core.PVector;
-
+import g4p_controls.*;
 enum condi {INF, HEALTHY, DEAD}
+/*
+Position der Person wahllos definiert
+Movement als fixer Parameter beim erzeugen der Person wird definiert
+durch OutOfBounds wird verhindert das sie den Canvas verlassen
 
+ */
 public class Person {
+    public static GCustomSlider slider;
     PApplet p;
     PVector position;
     PVector move;
@@ -29,10 +35,13 @@ public class Person {
         accualCondition = condition;
     }
 
+    public void infectionRange(){
+
+    }
     public void generatePosition() {
         position = new PVector(p.random(0, p.width), p.random(0, p.height));
     }
-
+    //definiert die gleichmäßige bewegung in eine Richtung
     public void movement() {
         position.x += move.x;
         position.y += move.y;
@@ -43,7 +52,7 @@ public class Person {
         outOfBounce();
 
     }
-
+    //Erkennung der Grenzen des Canvas und Invertierung der x bzw y Achse sodass alle in-bounce bleiben
     public void outOfBounce() {
         if (position.x >= p.width || position.x <= 0) {
             move.x = move.x * -1;
@@ -51,7 +60,7 @@ public class Person {
             move.y = move.y * -1;
         }
     }
-
+    //displayed die Person in der Canvas inklusive Farbcodierung
     public void show() {
         if (accualCondition.equals("HEALTHY")) {
             p.stroke(0, 247, 0);
