@@ -2,7 +2,7 @@ package de.hskl;
 
 import processing.core.PApplet;
 
-public class App extends PApplet {
+public class Main extends PApplet {
 
     public void settings() {
         size(500, 500);
@@ -17,6 +17,6 @@ public class App extends PApplet {
     }
 
     public static void main(String[] args) {
-        PApplet.main(new String[]{de.hskl.App.class.getName()});
+        PApplet.main(new String[]{Main.class.getName()});
     }
 }
