@@ -3,7 +3,9 @@ package de.hskl.model;
 import processing.core.PApplet;
 import processing.core.PVector;
 import g4p_controls.*;
+
 enum condi {INF, HEALTHY, DEAD}
+
 /*
 Position der Person wahllos definiert
 Movement als fixer Parameter beim erzeugen der Person wird definiert
@@ -17,6 +19,7 @@ public class Person {
     PVector move;
     // condi -> 1:healthy 2:inf 3:dead
     String accualCondition;
+    float radius = 3f;
 
     public Person(PApplet p) {
         this.p = p;
@@ -26,6 +29,13 @@ public class Person {
         move = new PVector(p.random(-0.5f, 0.5f), p.random(-0.5f, 0.5f));
     }
 
+    public PVector getPosition() {
+        return position;
+    }
+
+    public float getRadius() {
+        return radius;
+    }
 
     public String getCondition() {
         return accualCondition;
@@ -35,12 +45,10 @@ public class Person {
         accualCondition = condition;
     }
 
-    public void infectionRange(){
-
-    }
     public void generatePosition() {
         position = new PVector(p.random(0, p.width), p.random(0, p.height));
     }
+
     //definiert die gleichmäßige bewegung in eine Richtung
     public void movement() {
         position.x += move.x;
@@ -52,6 +60,7 @@ public class Person {
         outOfBounce();
 
     }
+
     //Erkennung der Grenzen des Canvas und Invertierung der x bzw y Achse sodass alle in-bounce bleiben
     public void outOfBounce() {
         if (position.x >= p.width || position.x <= 0) {
@@ -60,6 +69,7 @@ public class Person {
             move.y = move.y * -1;
         }
     }
+
     //displayed die Person in der Canvas inklusive Farbcodierung
     public void show() {
         if (accualCondition.equals("HEALTHY")) {
@@ -75,4 +85,3 @@ public class Person {
 
     }
 }
-
