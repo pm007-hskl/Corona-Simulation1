@@ -2,7 +2,7 @@ package de.hskl.model;
 
 import processing.core.PApplet;
 import processing.core.PVector;
-import g4p_controls.*;
+
 
 enum condi {INF, HEALTHY, DEAD}
 
@@ -13,7 +13,7 @@ durch OutOfBounds wird verhindert das sie den Canvas verlassen
 
  */
 public class Person {
-    public static GCustomSlider slider;
+
     PApplet p;
     PVector position;
     PVector move;

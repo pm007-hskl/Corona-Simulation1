@@ -1,11 +1,12 @@
 package de.hskl;
 
 import de.hskl.model.Person;
+import g4p_controls.GCustomSlider;
 import processing.core.PApplet;
 
 public class Main extends PApplet {
     Person[] pers = new Person[1000];
-
+    public static GCustomSlider slider;
     public static void main(String[] args) {
         PApplet.main(new String[]{Main.class.getName()});
     }
