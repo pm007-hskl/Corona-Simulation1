@@ -1,9 +1,6 @@
 package de.hskl;
 
-import g4p_controls.G4P;
-import g4p_controls.GCustomSlider;
-import g4p_controls.GEvent;
-import g4p_controls.GValueControl;
+import g4p_controls.*;
 import processing.core.PApplet;
 
 public class Main extends PApplet {
@@ -22,14 +19,30 @@ public class Main extends PApplet {
     }
 
     public void setup() {
+        /*
+        * Den Labelnamen der Slider mit den Slider gruppieren
+        * */
+
+        GGroup groupOfLabelReprRatio = new GGroup(this);
+        GLabel labelRepRatio = new GLabel(this, 50, 50, 200, 30, "Reproduktionszahl");
         buildSliderForBasicReproductionRatio();
+        groupOfLabelReprRatio.addControls(labelRepRatio, basicReproductionRatio);
+
+        GGroup groupOfLabelNumStartInfects = new GGroup(this);
+        GLabel labelNumInfects = new GLabel(this, 50, 150, 200, 30, "Anzahl der Infizierte am Anfang");
         buildSliderForNumberStartInfects();
+        groupOfLabelReprRatio.addControls(labelNumInfects, numPerson);
+
+        GGroup groupOfLabelNumPerson= new GGroup(this);
+        GLabel labelNumPerson = new GLabel(this, 50, 250, 200, 30, "Gesamtanzahl der Personen");
         buildSliderForNumberPerson();
+        groupOfLabelReprRatio.addControls(labelNumPerson, numStartInfections);
 
     }
 
 
     public void draw() {
+        background(255);
 
     }
 
@@ -45,11 +58,11 @@ public class Main extends PApplet {
         }
         if(slider == numPerson){
             numPersonValue = slider.getValueI();
-            System.out.println(numPersonValue);
+            System.out.println("Anzahl Personen: " + numPersonValue);
         }
         if (slider ==  numStartInfections) {
             numStartInfectionsValue =  slider.getValueI();
-            System.out.println(numStartInfectionsValue);
+            System.out.println("Anzahl Start Infizierte" + numStartInfectionsValue);
         }
     }
 
@@ -63,7 +76,7 @@ public class Main extends PApplet {
         basicReproductionRatio.setShowTicks(true);
         basicReproductionRatio.setEasing(20f);
         basicReproductionRatio.setNumberFormat(G4P.DECIMAL, 0);
-        basicReproductionRatio.setOpaque(true);
+        basicReproductionRatio.setOpaque(false);
         basicReproductionRatio.setPrecision(1);
     }
 
@@ -76,7 +89,7 @@ public class Main extends PApplet {
         numPerson.setShowTicks(true);
         numPerson.setEasing(6.0f);
         numPerson.setNumberFormat(G4P.INTEGER, 0);
-        numPerson.setOpaque(true);
+        numPerson.setOpaque(false);
     }
 
     public void buildSliderForNumberStartInfects() {
@@ -88,7 +101,7 @@ public class Main extends PApplet {
         numStartInfections.setShowTicks(true);
         numStartInfections.setEasing(6.0f);
         numStartInfections.setNumberFormat(G4P.INTEGER, 0);
-        numStartInfections.setOpaque(true);
+        numStartInfections.setOpaque(false);
     }
 
 }
