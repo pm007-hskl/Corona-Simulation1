@@ -4,6 +4,7 @@ package de.hskl;
 import de.hskl.model.Person;
 import g4p_controls.*;
 import processing.core.PApplet;
+
 import java.awt.*;
 
 public class Main extends PApplet {
@@ -11,11 +12,11 @@ public class Main extends PApplet {
     GCustomSlider basicReproductionRatio;
     GCustomSlider numPerson;
     GCustomSlider numStartInfections;
-    private float basicReproductionRatioValue;
-    private int numPersonValue;
-    private int numStartInfectionsValue;
+    private float basicReproductionRatioValue=2.0f;
+    private int numPersonValue=100;
+    private int numStartInfectionsValue=4;
 
-    Person[] pers = new Person[1000];
+    public Person[] pers = new Person[100];
     public static GCustomSlider slider;
     public static GButton btnstart;
     public static GButton btnstop;
@@ -39,29 +40,11 @@ public class Main extends PApplet {
     }
 
     public void setup() {
-        
+
         /*
          * Den Labelnamen der Slider mit den Slider gruppieren
          * */
-        GGroup groupOfLabelReprRatio = new GGroup(this);
-        GLabel labelRepRatio = new GLabel(this, 0, 70, 200, 30, "Reproduktionszahl");
-        buildSliderForBasicReproductionRatio();
-        groupOfLabelReprRatio.addControls(labelRepRatio, basicReproductionRatio);
-
-        GGroup groupOfLabelNumStartInfects = new GGroup(this);
-        GLabel labelNumInfects = new GLabel(this, 0, 170, 200, 30, "Anzahl der Infizierte am Anfang");
-        buildSliderForNumberStartInfects();
-        groupOfLabelReprRatio.addControls(labelNumInfects, numPerson);
-
-        GGroup groupOfLabelNumPerson = new GGroup(this);
-        GLabel labelNumPerson = new GLabel(this, 0, 270, 200, 30, "Gesamtanzahl der Personen");
-        buildSliderForNumberPerson();
-        groupOfLabelReprRatio.addControls(labelNumPerson, numStartInfections);
-        //frameRate(30);
-        for (int i = 0; i < pers.length; i++) {
-            pers[i] = new Person(this);
-            pers[i].generatePosition();
-        }
+        initialize();
 
         btnstart = new GButton(this, 10, 20, 140, 20, "START");
         btnstop = new GButton(this, 10, 50, 140, 20, "STOP");
@@ -76,6 +59,50 @@ public class Main extends PApplet {
         InfectedState.setFont(font);
         DeadState.setFont(font);
         HealedState.setFont(font);
+        GGroup groupOfLabelReprRatio = new GGroup(this);
+        GLabel labelRepRatio = new GLabel(this, 0, 70, 200, 30, "Reproduktionszahl");
+        buildSliderForBasicReproductionRatio();
+        groupOfLabelReprRatio.addControls(labelRepRatio, basicReproductionRatio);
+
+
+
+        GGroup groupOfLabelNumPerson = new GGroup(this);
+        GLabel labelNumPerson = new GLabel(this, 0, 170, 200, 30, "Gesamtanzahl der Personen");
+        buildSliderForNumberPerson();
+        groupOfLabelReprRatio.addControls(labelNumPerson, numPerson);
+
+        GGroup groupOfLabelNumStartInfects = new GGroup(this);
+        GLabel labelNumInfects = new GLabel(this, 0, 270, 200, 30, "Anzahl der Infizierte am Anfang");
+        buildSliderForNumberStartInfects();
+        groupOfLabelReprRatio.addControls(labelNumInfects, numStartInfections);
+        //frameRate(30);
+    }
+
+    //alles was durch Slider geändert wird muss hier neu geladen werden
+    private void initialize() {
+        if(numPersonValue>=numStartInfectionsValue){
+            for (int i = 0; i < numPersonValue; i++) {
+                pers[i] = new Person(this);
+                pers[i].generatePosition();
+            }
+
+            for(int i=0;i<numStartInfectionsValue;i++){
+                pers[i].setcondition("INFECTED");
+            }
+        }else{
+            for (int i = 0; i < numPersonValue; i++) {
+                pers[i] = new Person(this);
+                pers[i].generatePosition();
+            }
+            for(int i=0;i<numPersonValue;i++){
+                pers[i].setcondition("INFECTED");
+            }
+
+        }
+
+
+
+
     }
 
 
@@ -147,7 +174,7 @@ public class Main extends PApplet {
         basicReproductionRatio.setLimits(2, 0, 10);
         basicReproductionRatio.setNbrTicks(11);
         basicReproductionRatio.setShowTicks(true);
-        basicReproductionRatio.setEasing(20f);
+        basicReproductionRatio.setEasing(1.0f);
         basicReproductionRatio.setNumberFormat(G4P.DECIMAL, 0);
         basicReproductionRatio.setOpaque(false);
         basicReproductionRatio.setPrecision(1);
@@ -158,10 +185,10 @@ public class Main extends PApplet {
         numPerson = new GCustomSlider(this, 5, 170, 200, 100, "metallic");
         numPerson.setShowValue(true);
         numPerson.setShowLimits(true);
-        numPerson.setLimits(50, 0, 100);
+        numPerson.setLimits(100, 100, 1000);
         numPerson.setNbrTicks(11);
         numPerson.setShowTicks(true);
-        numPerson.setEasing(6.0f);
+        numPerson.setEasing(1.0f);
         numPerson.setNumberFormat(G4P.INTEGER, 0);
         numPerson.setOpaque(false);
     }
@@ -174,7 +201,7 @@ public class Main extends PApplet {
         numStartInfections.setLimits(4, 0, 100);
         numStartInfections.setNbrTicks(11);
         numStartInfections.setShowTicks(true);
-        numStartInfections.setEasing(6.0f);
+        numStartInfections.setEasing(1.0f);
         numStartInfections.setNumberFormat(G4P.INTEGER, 0);
         numStartInfections.setOpaque(false);
     }
@@ -182,6 +209,8 @@ public class Main extends PApplet {
 
     public void handleButtonEvents(GButton button, GEvent event) {
         if (button == btnstart && event == GEvent.CLICKED) {
+            pers = new Person[numPersonValue];
+            initialize();
             loop();
         }
         if (button == btnstop && event == GEvent.CLICKED) {
