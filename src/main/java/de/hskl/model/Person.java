@@ -46,7 +46,7 @@ public class Person {
     }
 
     public void generatePosition() {
-        position = new PVector(p.random(0, p.width), p.random(0, p.height));
+        position = new PVector(p.random(200, p.width), p.random(0, p.height));
     }
 
     //definiert die gleichmäßige bewegung in eine Richtung
@@ -67,6 +67,8 @@ public class Person {
             move.x = move.x * -1;
         } else if (position.y >= p.height || position.y <= 0) {
             move.y = move.y * -1;
+        }else if(position.x<=200){
+            move.x=move.x*-1;
         }
     }
 
