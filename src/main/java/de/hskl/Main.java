@@ -43,22 +43,20 @@ public class Main extends PApplet {
         /*
          * Den Labelnamen der Slider mit den Slider gruppieren
          * */
-
         GGroup groupOfLabelReprRatio = new GGroup(this);
-        GLabel labelRepRatio = new GLabel(this, 50, 50, 200, 30, "Reproduktionszahl");
+        GLabel labelRepRatio = new GLabel(this, 0, 70, 200, 30, "Reproduktionszahl");
         buildSliderForBasicReproductionRatio();
         groupOfLabelReprRatio.addControls(labelRepRatio, basicReproductionRatio);
 
         GGroup groupOfLabelNumStartInfects = new GGroup(this);
-        GLabel labelNumInfects = new GLabel(this, 50, 150, 200, 30, "Anzahl der Infizierte am Anfang");
+        GLabel labelNumInfects = new GLabel(this, 0, 170, 200, 30, "Anzahl der Infizierte am Anfang");
         buildSliderForNumberStartInfects();
         groupOfLabelReprRatio.addControls(labelNumInfects, numPerson);
 
         GGroup groupOfLabelNumPerson = new GGroup(this);
-        GLabel labelNumPerson = new GLabel(this, 50, 250, 200, 30, "Gesamtanzahl der Personen");
+        GLabel labelNumPerson = new GLabel(this, 0, 270, 200, 30, "Gesamtanzahl der Personen");
         buildSliderForNumberPerson();
         groupOfLabelReprRatio.addControls(labelNumPerson, numStartInfections);
-
         //frameRate(30);
         for (int i = 0; i < pers.length; i++) {
             pers[i] = new Person(this);
@@ -143,7 +141,7 @@ public class Main extends PApplet {
 
     // Slider Settings für Reproduktionsfaktor
     public void buildSliderForBasicReproductionRatio() {
-        basicReproductionRatio = new GCustomSlider(this, 50, 50, 400, 100, "metallic");
+        basicReproductionRatio = new GCustomSlider(this, 5, 70, 200, 100, "metallic");
         basicReproductionRatio.setShowValue(true);
         basicReproductionRatio.setShowLimits(true);
         basicReproductionRatio.setLimits(2, 0, 10);
@@ -157,7 +155,7 @@ public class Main extends PApplet {
 
 
     public void buildSliderForNumberPerson() {
-        numPerson = new GCustomSlider(this, 50, 150, 400, 100, "metallic");
+        numPerson = new GCustomSlider(this, 5, 170, 200, 100, "metallic");
         numPerson.setShowValue(true);
         numPerson.setShowLimits(true);
         numPerson.setLimits(50, 0, 100);
@@ -170,7 +168,7 @@ public class Main extends PApplet {
 
 
     public void buildSliderForNumberStartInfects() {
-        numStartInfections = new GCustomSlider(this, 50, 250, 400, 100, "metallic");
+        numStartInfections = new GCustomSlider(this, 5, 270, 200, 100, "metallic");
         numStartInfections.setShowValue(true);
         numStartInfections.setShowLimits(true);
         numStartInfections.setLimits(4, 0, 100);
