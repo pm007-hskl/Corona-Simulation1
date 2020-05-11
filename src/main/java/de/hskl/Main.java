@@ -2,6 +2,7 @@ package de.hskl;
 
 import de.hskl.model.Person;
 import g4p_controls.GButton;
+import g4p_controls.GCScheme;
 import g4p_controls.GCustomSlider;
 import g4p_controls.GEvent;
 import processing.core.PApplet;
@@ -27,10 +28,10 @@ public class Main extends PApplet {
             pers[i].generatePosition();
         }
 
-        pers[54].setcondition("DEAD");
         btnstart = new GButton(this, 10, 20, 140, 20, "START");
         btnstop = new GButton(this, 10, 50, 140, 20, "STOP");
-
+        btnstart.setLocalColorScheme(GCScheme.CYAN_SCHEME);
+        btnstop.setLocalColorScheme(GCScheme.RED_SCHEME);
     }
 
     public void draw() {
