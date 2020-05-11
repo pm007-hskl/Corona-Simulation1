@@ -152,23 +152,24 @@ public class Main extends PApplet {
 
     public void handleSliderEvents(GValueControl slider, GEvent event) {
         if (slider == basicReproductionRatio) {
-            basicReproductionRatioValue = slider.getValueF();
-            System.out.println("Reproduktionszahl: " + basicReproductionRatioValue);
+            basicReproductionRatioValue= round1diggit(slider);
+            //System.out.println("Reproduktionszahl: " + basicReproductionRatioValue);
         }
         if (slider == numPerson) {
             numPersonValue = slider.getValueI();
-            System.out.println("Anzahl Personen: " + numPersonValue);
+            //System.out.println("Anzahl Personen: " + numPersonValue);
         }
         if (slider == numStartInfections) {
             numStartInfectionsValue = slider.getValueI();
-            System.out.println("Anzahl Start Infizierte" + numStartInfectionsValue);
+            //System.out.println("Anzahl Start Infizierte" + numStartInfectionsValue);
         }
     }
 
 
+
     // Slider Settings für Reproduktionsfaktor
     public void buildSliderForBasicReproductionRatio() {
-        basicReproductionRatio = new GCustomSlider(this, 5, 70, 200, 100, "metallic");
+        basicReproductionRatio = new GCustomSlider(this, 5, 70, 200, 100, "grey_blue");
         basicReproductionRatio.setShowValue(true);
         basicReproductionRatio.setShowLimits(true);
         basicReproductionRatio.setLimits(2, 0, 10);
@@ -182,7 +183,7 @@ public class Main extends PApplet {
 
 
     public void buildSliderForNumberPerson() {
-        numPerson = new GCustomSlider(this, 5, 170, 200, 100, "metallic");
+        numPerson = new GCustomSlider(this, 5, 170, 200, 100, "grey_blue");
         numPerson.setShowValue(true);
         numPerson.setShowLimits(true);
         numPerson.setLimits(100, 100, 1000);
@@ -195,7 +196,7 @@ public class Main extends PApplet {
 
 
     public void buildSliderForNumberStartInfects() {
-        numStartInfections = new GCustomSlider(this, 5, 270, 200, 100, "metallic");
+        numStartInfections = new GCustomSlider(this, 5, 270, 200, 100, "grey_blue");
         numStartInfections.setShowValue(true);
         numStartInfections.setShowLimits(true);
         numStartInfections.setLimits(4, 0, 100);
@@ -225,7 +226,7 @@ public class Main extends PApplet {
                 if (i != j) {
                     //vergleich personDistance mit radius von Person i
                     if (personDistance(pers[i], pers[j]) <= pers[i].getRadius()) {
-                        //TODO infeketions algorithmus
+                        //TODO infeketions algorythmus
                     }
                 }
             }
@@ -236,6 +237,10 @@ public class Main extends PApplet {
     private float personDistance(Person per, Person per1) {
         return dist(per.getPosition().x, per.getPosition().y, per1.getPosition().x, per1.getPosition().y);
     }
+    private float round1diggit(GValueControl slider) {
+        return (float)(((int)(slider.getValueF()*10))/10.0);
+    }
+
 
 
 }
