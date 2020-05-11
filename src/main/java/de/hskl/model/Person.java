@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 
-enum condi {INF, HEALTHY, DEAD}
+enum condi {INFECTED, HEALTHY, DEAD,HEALED}
 
 /*
 Position der Person wahllos definiert
@@ -77,12 +77,15 @@ public class Person {
         if (accualCondition.equals("HEALTHY")) {
             p.stroke(0, 247, 0);
             p.point(position.x, position.y);
-        } else if (accualCondition.equals("INF")) {
+        } else if (accualCondition.equals("INFECTED")) {
             p.stroke(255, 255, 0);
             p.point(position.x, position.y);
-        } else {
+        } else if(accualCondition.equals("DEAD")){
             p.stroke(255, 0, 0);
             p.point(position.x, position.y);
+        }else{
+            p.stroke(0,51,255);
+            p.point(position.x,position.y);
         }
 
     }
