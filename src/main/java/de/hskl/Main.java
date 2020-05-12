@@ -15,7 +15,6 @@ public class Main extends PApplet {
     private float basicReproductionRatioValue=2.0f;
     private int numPersonValue=100;
     private int numStartInfectionsValue=4;
-
     public Person[] pers = new Person[100];
     public static GCustomSlider slider;
     public static GButton btnstart;
@@ -29,6 +28,9 @@ public class Main extends PApplet {
     public static int Deadcc = 0;
     public static int Healedcc = 0;
     public static Font font = new Font("TimesRoman", Font.PLAIN, 20);
+    public static int framecounter=0;
+
+    public static int DayUPToHealing;
 
 
     public static void main(String[] args) {
@@ -134,6 +136,7 @@ public class Main extends PApplet {
                     break;
             }
         }
+        Infected();
 
 
         healthyState.setText("Anzahl gesunder Menschen: " + healthycc);
@@ -147,6 +150,18 @@ public class Main extends PApplet {
 
         HealedState.setText("Anzahl geheilter Personen: " + Healedcc);
         Healedcc = 0;
+        for(int i=0;i<pers.length;i++){
+            if(pers[i].getCondition().equals("INFECTED")) {
+                if (pers[i].getCounter() >= 300) {
+                    pers[i].resetCounter();
+                } else {
+                    pers[i].riseCounter();
+                }
+                if(pers[i].getDaysOfInfection()>=1000){
+                    pers[i].setcondition("HEALED");
+                }
+            }
+        }
     }
 
 
@@ -219,26 +234,33 @@ public class Main extends PApplet {
         }
     }
 
+    private float personDistance(Person per, Person per1) {
+        return dist(per.getPosition().x, per.getPosition().y, per1.getPosition().x, per1.getPosition().y);
+    }
 
-    public void infect() {
-        for (int i = 0; i < pers.length; i++) {
-            for (int j = 0; j < pers.length; j++) {
-                if (i != j) {
-                    //vergleich personDistance mit radius von Person i
-                    if (personDistance(pers[i], pers[j]) <= pers[i].getRadius()) {
-                        //TODO infeketions algorythmus
+    private float round1diggit(GValueControl slider) {
+        return (float)(((int)(slider.getValueF()*10))/10.0);
+    }
+
+    public void Infected() {
+
+        for (int i=0; i<pers.length; i++) {
+            if (pers[i].getCondition().equals("INFECTED")) {
+                //---- Übertragen der Krankheit auf eine andere Person?
+                for (int j=0; j<pers.length; j++) {
+                    if(pers[i]!=pers[j]){
+                        if (personDistance(pers[i], pers[j]) < pers[j].getRadius()) {
+                            if(pers[i].isAbleToInfect(basicReproductionRatioValue)){
+                                pers[j].setcondition("INFECTED");
+                                pers[j].daysOfInfection = DayUPToHealing;
+                            }
+
+
+                        }
                     }
                 }
             }
         }
-    }
-
-
-    private float personDistance(Person per, Person per1) {
-        return dist(per.getPosition().x, per.getPosition().y, per1.getPosition().x, per1.getPosition().y);
-    }
-    private float round1diggit(GValueControl slider) {
-        return (float)(((int)(slider.getValueF()*10))/10.0);
     }
 
 

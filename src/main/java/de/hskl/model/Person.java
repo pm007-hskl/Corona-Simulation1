@@ -19,7 +19,11 @@ public class Person {
     PVector move;
     // condi -> 1:healthy 2:inf 3:dead
     String accualCondition;
-    float radius = 3f;
+    float radius = 7f;
+    public int daysOfInfection=0;
+    public int dayCounter=0;
+    public boolean canInfect=false;
+    public int infectCounter=0;
 
     public Person(PApplet p) {
         this.p = p;
@@ -72,6 +76,10 @@ public class Person {
         }
     }
 
+    public int getDaysOfInfection() {
+        return daysOfInfection;
+    }
+
     //displayed die Person in der Canvas inklusive Farbcodierung
     public void show() {
         if (accualCondition.equals("HEALTHY")) {
@@ -88,5 +96,28 @@ public class Person {
             p.point(position.x,position.y);
         }
 
+    }
+    public int getCounter(){
+        return dayCounter;
+    }
+    public void riseCounter(){
+        daysOfInfection++;
+        dayCounter++;
+    }
+    public void resetCounter(){
+        System.out.println("called reset");
+        dayCounter=0;
+        canInfect=true;
+        infectCounter=0;
+    }
+    public boolean isAbleToInfect(float reproduction){
+        if(infectCounter<=reproduction*10.0f) {
+            canInfect=true;
+            infectCounter+=10;
+        }else{
+            canInfect=false;
+        }
+
+        return canInfect;
     }
 }
