@@ -157,7 +157,12 @@ public class Main extends PApplet {
                 } else {
                     pers[i].riseCounter();
                 }
-                if(pers[i].getDaysOfInfection()>=1000){
+                if((int)(Math.random()*1000)+1<=8&&pers[i].getIsSafe()==false){
+                    pers[i].setcondition("DEAD");
+                }else{
+                    pers[i].setIsSafe(true);
+                }
+                if(pers[i].getDaysOfInfection()>=700){
                     pers[i].setcondition("HEALED");
                 }
             }
@@ -248,7 +253,7 @@ public class Main extends PApplet {
             if (pers[i].getCondition().equals("INFECTED")) {
                 //---- Übertragen der Krankheit auf eine andere Person?
                 for (int j=0; j<pers.length; j++) {
-                    if(pers[i]!=pers[j]){
+                    if(pers[i]!=pers[j]&&pers[j].getCondition().equals("HEALTHY")){
                         if (personDistance(pers[i], pers[j]) < pers[j].getRadius()) {
                             if(pers[i].isAbleToInfect(basicReproductionRatioValue)){
                                 pers[j].setcondition("INFECTED");

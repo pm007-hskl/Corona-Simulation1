@@ -24,6 +24,7 @@ public class Person {
     public int dayCounter=0;
     public boolean canInfect=false;
     public int infectCounter=0;
+    public boolean isSafe=false;
 
     public Person(PApplet p) {
         this.p = p;
@@ -109,9 +110,13 @@ public class Person {
         dayCounter=0;
         canInfect=true;
         infectCounter=0;
+        isSafe=false;
+    }
+    public boolean getIsSafe(){
+        return isSafe;
     }
     public boolean isAbleToInfect(float reproduction){
-        if(infectCounter<=reproduction*10.0f) {
+        if(infectCounter<reproduction*10.0f) {
             canInfect=true;
             infectCounter+=10;
         }else{
@@ -119,5 +124,8 @@ public class Person {
         }
 
         return canInfect;
+    }
+    public void setIsSafe(boolean value){
+        isSafe=value;
     }
 }
