@@ -50,6 +50,14 @@ public class Person {
         accualCondition = condition;
     }
 
+    public void setIsSafe(boolean value){
+        isSafe=value;
+    }
+
+    public boolean getIsSafe(){
+        return isSafe;
+    }
+
     public void generatePosition() {
         position = new PVector(p.random(200, p.width), p.random(0, p.height));
     }
@@ -101,6 +109,7 @@ public class Person {
     public int getCounter(){
         return dayCounter;
     }
+
     public void riseCounter(){
         daysOfInfection++;
         dayCounter++;
@@ -111,9 +120,7 @@ public class Person {
         infectCounter=0;
         isSafe=false;
     }
-    public boolean getIsSafe(){
-        return isSafe;
-    }
+
     public boolean isAbleToInfect(float reproduction){
         if(infectCounter<reproduction*10.0f) {
             canInfect=true;
@@ -124,7 +131,5 @@ public class Person {
 
         return canInfect;
     }
-    public void setIsSafe(boolean value){
-        isSafe=value;
-    }
+
 }
