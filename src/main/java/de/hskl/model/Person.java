@@ -106,7 +106,6 @@ public class Person {
         dayCounter++;
     }
     public void resetCounter(){
-        System.out.println("called reset");
         dayCounter=0;
         canInfect=true;
         infectCounter=0;
