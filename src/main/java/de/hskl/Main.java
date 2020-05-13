@@ -98,6 +98,7 @@ public class Main extends PApplet {
 
     /*
      * Jede Änderung des Sliders führt zu einer Neuinitialisierung der Werte
+     * dies muss mit dem Startbutton bestötigt werden
      * */
 
     private void initialize() {
@@ -192,7 +193,7 @@ public class Main extends PApplet {
      * handleXXEvents wird nur bei Änderung der Werte ausgeführt,
      * dies übernimmt Processing von selbst
      * */
-    
+
     public void handleSliderEvents(GValueControl slider, GEvent event) {
         if (slider == basicReproductionRatio) {
             basicReproductionRatioValue = MathGValueControl.roundOneDigit(slider);
