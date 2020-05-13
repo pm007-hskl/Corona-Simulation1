@@ -28,7 +28,7 @@ public class AlgorithmInfection {
                             if (pers[i].isAbleToInfect(basicReproductionRatioValue)) {
 
                                 pers[j].setCurrentHealthStatus(HealthStatus.INFECTED);
-                                pers[j].daysOfInfection = dayUPToHealing;
+                                pers[j].setDaysOfInfection(dayUPToHealing);
                             }
                         }
                     }

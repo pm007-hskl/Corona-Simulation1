@@ -13,16 +13,16 @@ import processing.core.PVector;
 
 public class Person {
 
-    PApplet p;
-    PVector position;
-    PVector move;
-    HealthStatus currentHealthStatus;
-    float radiusPerson = 7f;
-    public int daysOfInfection = 0;
-    public int daysCounter = 0;
-    public boolean canInfect = false;
-    public int infectCounter = 0;
-    public boolean isSafe = false;
+    private PApplet p;
+    private PVector position;
+    private PVector move;
+    private HealthStatus currentHealthStatus;
+    private float radiusPerson = 7f;
+    private int daysOfInfection = 0;
+    private int daysCounter = 0;
+    private boolean canInfect = false;
+    private int infectCounter = 0;
+    private boolean isSafe = false;
 
     public Person(PApplet p) {
         this.p = p;
@@ -50,6 +50,10 @@ public class Person {
         return daysOfInfection;
     }
 
+    public void setDaysOfInfection(int daysOfInfection) {
+        this.daysOfInfection = daysOfInfection;
+    }
+
     public int getCounter() {
         return daysCounter;
     }
@@ -66,6 +70,7 @@ public class Person {
     public void generateRandomPosition() {
         position = new PVector(p.random(200, p.width), p.random(0, p.height));
     }
+
 
 
     /*
