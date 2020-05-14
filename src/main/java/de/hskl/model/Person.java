@@ -54,7 +54,7 @@ public class Person {
         this.daysOfInfection = daysOfInfection;
     }
 
-    public int getCounter() {
+    public int getDaysCounter() {
         return daysCounter;
     }
 
@@ -145,7 +145,7 @@ public class Person {
     }
 
 
-    public void resetCounter() {
+    public void resetCounters() {
         daysCounter = 0;
         canInfect = true;
         infectCounter = 0;

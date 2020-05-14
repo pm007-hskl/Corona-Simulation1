@@ -5,8 +5,9 @@ import g4p_controls.GCustomSlider;
 import processing.core.PApplet;
 
 public class GuiSettings {
+
     /*
-     * Slider Settings für Reproduktionsfaktor
+     * Slider Settings
      * */
 
     public static GCustomSlider buildSliderForBasicReproductionRatio(PApplet p, GCustomSlider basicReproductionRatio) {

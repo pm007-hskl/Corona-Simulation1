@@ -153,6 +153,9 @@ public class Main extends PApplet {
 
         AlgorithmInfection.Infected(persons, basicReproductionRatioValue, dayUPToHealing);
 
+        /*
+        * Gui Werte aktualiseren
+        * */
 
         healthyState.setText("Anzahl gesunder Menschen: " + healthyCounter);
         healthyCounter = 0;
@@ -170,8 +173,8 @@ public class Main extends PApplet {
         for (int i = 0; i < persons.length; i++) {
 
             if (persons[i].getCurrentHealthStatus() == INFECTED) {
-                if (persons[i].getCounter() >= 300) {
-                    persons[i].resetCounter();
+                if (persons[i].getDaysCounter() >= 300) {
+                    persons[i].resetCounters();
                 } else {
                     persons[i].riseCounter();
                 }
