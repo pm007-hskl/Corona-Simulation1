@@ -1,7 +1,6 @@
 package de.hskl;
 
 import de.hskl.contol.AlgorithmInfection;
-import de.hskl.model.HealthStatus;
 import de.hskl.util.MathGValueControl;
 import de.hskl.model.Person;
 import de.hskl.view.GuiSettings;
@@ -16,9 +15,9 @@ public class Main extends PApplet {
     GCustomSlider basicReproductionRatio;
     GCustomSlider numPerson;
     GCustomSlider numStartInfections;
-    private float basicReproductionRatioValue = 2.0f;
-    private int numPersonValue = 100;
-    private int numStartInfectionsValue = 4;
+    private float GuiBasicReproductionRatioValue = 2.0f;
+    private int GuiNumPersonValue = 100;
+    private int GuiNumStartInfectionsValue = 4;
     public Person[] persons = new Person[100];
     public static GCustomSlider slider;
     public static GButton btnstart;
@@ -33,7 +32,6 @@ public class Main extends PApplet {
     public static int healedCounter = 0;
     public static Font font = new Font("TimesRoman", Font.PLAIN, 20);
     public static int frameCounter = 0; // Test feste Framerate
-    public static int dayUPToHealing;
 
 
     public static void main(String[] args) {
@@ -102,18 +100,18 @@ public class Main extends PApplet {
      * */
 
     private void initialize() {
-        if (numPersonValue >= numStartInfectionsValue) {
-            for (int i = 0; i < numPersonValue; i++) {
+        if (GuiNumPersonValue >= GuiNumStartInfectionsValue) {
+            for (int i = 0; i < GuiNumPersonValue; i++) {
                 persons[i] = new Person(this);
                 persons[i].generateRandomPosition();
             }
 
-            for (int i = 0; i < numStartInfectionsValue; i++) {
+            for (int i = 0; i < GuiNumStartInfectionsValue; i++) {
                 persons[i].setCurrentHealthStatus(INFECTED);
             }
 
         } else {
-            for (int i = 0; i < numPersonValue; i++) {
+            for (int i = 0; i < GuiNumPersonValue; i++) {
                 persons[i] = new Person(this);
                 persons[i].generateRandomPosition();
                 persons[i].setCurrentHealthStatus(INFECTED);
@@ -151,7 +149,7 @@ public class Main extends PApplet {
             }
         }
 
-        AlgorithmInfection.Infected(persons, basicReproductionRatioValue, dayUPToHealing);
+        AlgorithmInfection.infect(persons, GuiBasicReproductionRatioValue);
 
         /*
         * Gui Werte aktualiseren
@@ -169,22 +167,31 @@ public class Main extends PApplet {
         healedState.setText("Anzahl geheilter Personen: " + healedCounter);
         healedCounter = 0;
 
-        // TODO Bitte eine Beschreibung einfügen vielleicht auch in eine eigene Methode auslagern
+        /*
+        * DayTime-Simulator: zählt Frames, um Reproduktionsfaktor zu visualisieren
+        * Setzt die Wahrscheinlichkeit, dass ein Infizierter stirbt
+        * */
         for (int i = 0; i < persons.length; i++) {
 
             if (persons[i].getCurrentHealthStatus() == INFECTED) {
+
+                //300 Frames entsprechen einem Tag
                 if (persons[i].getDaysCounter() >= 300) {
                     persons[i].resetCounters();
                 } else {
                     persons[i].riseCounter();
                 }
+
+                //Todeswahrscheinlichkeit 0,8%, es wird ein Wert zwischen 1 und 1000 gewürfelt, wenn dieser kleiner oder gleich 8 ist stirbt die Person
                 if (((int) (Math.random() * 1000) + 1 <= 8) && (persons[i].getIsSafe() == false)) {
                     persons[i].setCurrentHealthStatus(DEAD);
                 } else {
                     persons[i].setIsSafe(true);
                 }
+
+                //nach 700 Frames sind sie wieder geheilt, falls sie nicht bereits tot sind
                 if (persons[i].getDaysOfInfection() >= 700) {
-                    persons[i].setCurrentHealthStatus(HealthStatus.HEALED);
+                    persons[i].setCurrentHealthStatus(HEALED);
                 }
             }
         }
@@ -192,31 +199,32 @@ public class Main extends PApplet {
 
 
     /*
-     * xxEvents stellt die Werte der Eingabe von der GUI bereit
-     * handleXXEvents wird nur bei Änderung der Werte ausgeführt,
+     * handleSliderEvents wird nur bei Änderung der Werte ausgeführt,
      * dies übernimmt Processing von selbst
      * */
 
     public void handleSliderEvents(GValueControl slider, GEvent event) {
         if (slider == basicReproductionRatio) {
-            basicReproductionRatioValue = MathGValueControl.roundOneDigit(slider);
+            GuiBasicReproductionRatioValue = MathGValueControl.roundOneDigit(slider);
             //System.out.println("Reproduktionszahl: " + basicReproductionRatioValue);
         }
         if (slider == numPerson) {
-            numPersonValue = slider.getValueI();
+            GuiNumPersonValue = slider.getValueI();
             //System.out.println("Anzahl Personen: " + numPersonValue);
         }
         if (slider == numStartInfections) {
-            numStartInfectionsValue = slider.getValueI();
+            GuiNumStartInfectionsValue = slider.getValueI();
             //System.out.println("Anzahl Start Infizierte" + numStartInfectionsValue);
         }
     }
 
 
-
+    /*
+    * xxEvents stellt die Werte der Eingabe von der GUI bereit
+    * */
     public void handleButtonEvents(GButton button, GEvent event) {
         if (button == btnstart && event == GEvent.CLICKED) {
-            persons = new Person[numPersonValue];
+            persons = new Person[GuiNumPersonValue];
             initialize();
             loop();
         }

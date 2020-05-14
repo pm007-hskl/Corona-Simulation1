@@ -50,10 +50,6 @@ public class Person {
         return daysOfInfection;
     }
 
-    public void setDaysOfInfection(int daysOfInfection) {
-        this.daysOfInfection = daysOfInfection;
-    }
-
     public int getDaysCounter() {
         return daysCounter;
     }

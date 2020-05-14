@@ -12,8 +12,13 @@ public class AlgorithmInfection {
     }
 
 
-    // TODO Was wird hier gemacht. Beschreibung einfügen
-    public static void Infected(Person[] pers, float basicReproductionRatioValue, int dayUPToHealing) {
+    //
+    /*
+    *  Vergleicht 2 Personen innerhalb der Infektionsradius, ob diese sich gegenseitig anstecken
+    *  (eine Person muss gesund sein und die andere infiziert)
+    *  der Reproduktionsfaftor gibt mit an wie viele eine Person infizieren kann
+    * */
+    public static void infect(Person[] pers, float basicReproductionRatioValue) {
 
         for (int i = 0; i < pers.length; i++) {
 
@@ -28,7 +33,7 @@ public class AlgorithmInfection {
                             if (pers[i].isAbleToInfect(basicReproductionRatioValue)) {
 
                                 pers[j].setCurrentHealthStatus(HealthStatus.INFECTED);
-                                pers[j].setDaysOfInfection(dayUPToHealing);
+
                             }
                         }
                     }
