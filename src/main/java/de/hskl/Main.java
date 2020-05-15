@@ -6,7 +6,9 @@ import de.hskl.model.Person;
 import de.hskl.view.GuiSettings;
 import g4p_controls.*;
 import processing.core.PApplet;
+
 import java.awt.*;
+
 import static de.hskl.model.HealthStatus.*;
 
 
@@ -31,7 +33,7 @@ public class Main extends PApplet {
     public static int deadCounter = 0;
     public static int healedCounter = 0;
     public static Font font = new Font("TimesRoman", Font.PLAIN, 20);
-    public static int strokeWeightValue= 3; //dicke der Striche definiert
+    public static int strokeWeightValue = 3; //dicke der Striche definiert
     public static int frameCounter = 0; // Test feste Framerate
 
 
@@ -103,7 +105,7 @@ public class Main extends PApplet {
     private void initialize() {
         if (GuiNumPersonValue >= GuiNumStartInfectionsValue) {
             for (int i = 0; i < GuiNumPersonValue; i++) {
-                persons[i] = new Person(this,strokeWeightValue);
+                persons[i] = new Person(this, strokeWeightValue);
                 persons[i].generateRandomPosition();
             }
 
@@ -113,7 +115,7 @@ public class Main extends PApplet {
 
         } else {
             for (int i = 0; i < GuiNumPersonValue; i++) {
-                persons[i] = new Person(this,strokeWeightValue);
+                persons[i] = new Person(this, strokeWeightValue);
                 persons[i].generateRandomPosition();
                 persons[i].setCurrentHealthStatus(INFECTED);
             }
@@ -154,8 +156,8 @@ public class Main extends PApplet {
         AlgorithmInfection.infect(persons, GuiBasicReproductionRatioValue);
 
         /*
-        * Gui Werte aktualiseren
-        * */
+         * Gui Werte aktualiseren
+         * */
 
         healthyState.setText("Anzahl gesunder Menschen: " + healthyCounter);
         healthyCounter = 0;
@@ -170,9 +172,9 @@ public class Main extends PApplet {
         healedCounter = 0;
 
         /*
-        * DayTime-Simulator: zählt Frames, um Reproduktionsfaktor zu visualisieren
-        * Setzt die Wahrscheinlichkeit, dass ein Infizierter stirbt
-        * */
+         * DayTime-Simulator: zählt Frames, um Reproduktionsfaktor zu visualisieren
+         * Setzt die Wahrscheinlichkeit, dass ein Infizierter stirbt
+         * */
         for (int i = 0; i < persons.length; i++) {
 
             if (persons[i].getCurrentHealthStatus() == INFECTED) {
@@ -222,8 +224,8 @@ public class Main extends PApplet {
 
 
     /*
-    * xxEvents stellt die Werte der Eingabe von der GUI bereit
-    * */
+     * xxEvents stellt die Werte der Eingabe von der GUI bereit
+     * */
     public void handleButtonEvents(GButton button, GEvent event) {
         if (button == btnstart && event == GEvent.CLICKED) {
             persons = new Person[GuiNumPersonValue];
@@ -234,7 +236,5 @@ public class Main extends PApplet {
             noLoop();
         }
     }
-
-
 
 }
