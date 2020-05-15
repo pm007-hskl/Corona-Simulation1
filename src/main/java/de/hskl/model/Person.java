@@ -23,9 +23,11 @@ public class Person {
     private boolean canInfect = false;
     private int infectCounter = 0;
     private boolean isSafe = false;
+    private int strokeWeightValue;
 
-    public Person(PApplet p) {
+    public Person(PApplet p,int strokeWeightValue) {
         this.p = p;
+        this.strokeWeightValue=strokeWeightValue;
         currentHealthStatus = HealthStatus.HEALTHY;
         move = new PVector(p.random(-0.5f, 0.5f), p.random(-0.5f, 0.5f));
     }
@@ -101,11 +103,11 @@ public class Person {
      */
 
     public void outOfBounce() {
-        if (position.x >= p.width || position.x <= 0) {
+        if (position.x > p.width || position.x <= 0) {
             move.x = -1 * move.x;
-        } else if (position.y >= p.height || position.y <= 0) {
+        } else if (position.y > p.height || position.y <= 0) {
             move.y = -1 * move.y;
-        } else if (position.x <= 200) {
+        } else if (position.x <= 200+strokeWeightValue) {
             move.x = -1 * move.x;
         }
     }

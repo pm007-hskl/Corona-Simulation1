@@ -31,6 +31,7 @@ public class Main extends PApplet {
     public static int deadCounter = 0;
     public static int healedCounter = 0;
     public static Font font = new Font("TimesRoman", Font.PLAIN, 20);
+    public static int strokeWeightValue= 3; //dicke der Striche definiert
     public static int frameCounter = 0; // Test feste Framerate
 
 
@@ -102,7 +103,7 @@ public class Main extends PApplet {
     private void initialize() {
         if (GuiNumPersonValue >= GuiNumStartInfectionsValue) {
             for (int i = 0; i < GuiNumPersonValue; i++) {
-                persons[i] = new Person(this);
+                persons[i] = new Person(this,strokeWeightValue);
                 persons[i].generateRandomPosition();
             }
 
@@ -112,7 +113,7 @@ public class Main extends PApplet {
 
         } else {
             for (int i = 0; i < GuiNumPersonValue; i++) {
-                persons[i] = new Person(this);
+                persons[i] = new Person(this,strokeWeightValue);
                 persons[i].generateRandomPosition();
                 persons[i].setCurrentHealthStatus(INFECTED);
             }
@@ -124,14 +125,15 @@ public class Main extends PApplet {
 
         background(0);
         stroke(255);
+        strokeWeight(strokeWeightValue);
         rect(0, 0, 200, height);
-        strokeWeight(3);
 
+        // Person anzeigen und bewegung berechnen
         for (int i = 0; i < persons.length; i++) {
             persons[i].move();
             persons[i].show();
         }
-
+        //Zählt bei jedem durchlauf die Anzahl toter,gesunder,geheilter und infizierter Menschen
         for (int i = 0; i < persons.length; i++) {
             switch (persons[i].getCurrentHealthStatus()) {
                 case HEALTHY:
