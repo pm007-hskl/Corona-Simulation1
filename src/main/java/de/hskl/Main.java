@@ -33,7 +33,7 @@ public class Main extends PApplet {
     public static int deadCounter = 0;
     public static int healedCounter = 0;
     public static Font font = new Font("TimesRoman", Font.PLAIN, 20);
-    public static int strokeWeightValue = 3; //dicke der Striche definiert
+    public static int strokeWeightValue = 4; //dicke der Striche definiert
     public static int frameCounter = 0; // Test feste Framerate
 
 
@@ -106,7 +106,7 @@ public class Main extends PApplet {
         if (GuiNumPersonValue >= GuiNumStartInfectionsValue) {
             for (int i = 0; i < GuiNumPersonValue; i++) {
                 persons[i] = new Person(this, strokeWeightValue);
-                persons[i].generateRandomPosition();
+                persons[i].generateRandomPosition(strokeWeightValue);
             }
 
             for (int i = 0; i < GuiNumStartInfectionsValue; i++) {
@@ -116,7 +116,7 @@ public class Main extends PApplet {
         } else {
             for (int i = 0; i < GuiNumPersonValue; i++) {
                 persons[i] = new Person(this, strokeWeightValue);
-                persons[i].generateRandomPosition();
+                persons[i].generateRandomPosition(strokeWeightValue);
                 persons[i].setCurrentHealthStatus(INFECTED);
             }
         }
