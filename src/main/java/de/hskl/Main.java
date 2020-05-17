@@ -33,7 +33,7 @@ public class Main extends PApplet {
     public static int deadCounter = 0;
     public static int healedCounter = 0;
     public static Font font = new Font("TimesRoman", Font.PLAIN, 20);
-    public static int strokeWeightValue = 4; //dicke der Striche definiert
+    public static int strokeWeightValue = 8; //dicke der Punkte definiert
     public static int frameCounter = 0; // Test feste Framerate
 
 
