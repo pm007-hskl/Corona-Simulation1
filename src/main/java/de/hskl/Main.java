@@ -74,6 +74,10 @@ public class Main extends PApplet {
 
         /*
          * Den Labelnamen der Slider mit den Slider gruppieren
+         *
+         *
+         *
+         *
          * */
 
         GGroup groupOfLabelReprRatio = new GGroup(this);
