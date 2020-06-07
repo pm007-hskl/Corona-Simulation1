@@ -6,8 +6,7 @@
 Dies ist eine Simulation der Verteilung der Koronainfektion
 =============================================
 
-- Nach Auswahl der Gesamtanzahl der Personen,
-- Reproduktionszahl R0 und der Anzahl der infizierte am Anfang, kann das Programm gestartet werden.
+- Nach Auswahl der Gesamtanzahl der Personen, Reproduktionszahl R0 und der Anzahl der infizierte am Anfang, kann das Programm gestartet werden.
 - Während der Simulation wird es die Anzahl gesunder, infizierter, geheilter und toter Menschen angezeigt
 - bei direktem Kontakt mit einer infizierten Person mit einem Abstand unter 1,5 Meter könnte ein Person infiziert werden
 - Eine infizierte Person kann sich nach 8 Tagen erholen
