@@ -49,13 +49,13 @@ public class AlgorithmInfection {
             if (pers[i].getCurrentHealthStatus() == HealthStatus.INFECTED) {
                 //---- Übertragen der Krankheit auf eine andere Person?
                 for (int j = 0; j < pers.length; j++) {
-
+                        //prüfen, ob die Person j nicht infiziert ist
                     if ((pers[i] != pers[j]) && (pers[j].getCurrentHealthStatus() == HealthStatus.HEALTHY)) {
-
+                        //Prüfen, ob die Person j von der person i nah ist
                         if (personDistance(pers[i], pers[j]) < pers[j].getRadiusPerson()) {
-
+                            //person wird überprüft,ob sie infiziert werden kann
                             if (pers[i].isAbleToInfect(basicReproductionRatioValue)) {
-
+                                //Person j wird infiziert
                                 pers[j].setCurrentHealthStatus(HealthStatus.INFECTED);
 
                             }

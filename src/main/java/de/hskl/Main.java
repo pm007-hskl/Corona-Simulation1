@@ -65,6 +65,7 @@ public class Main extends PApplet {
     }
 
     public void settings() {
+        //Bildschirmgröße
         size(1000, 800);
     }
 
@@ -147,7 +148,7 @@ public class Main extends PApplet {
 
 
     public void draw() {
-
+        //Fenster hintergrund und Infos
         background(0);
         stroke(255);
         strokeWeight(strokeWeightValue);

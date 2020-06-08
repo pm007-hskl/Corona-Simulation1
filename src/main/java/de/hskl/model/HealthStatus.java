@@ -23,6 +23,6 @@
 
 package de.hskl.model;
 
-
+// Personenstatus
 public enum HealthStatus {INFECTED, HEALTHY, DEAD, HEALED}
 

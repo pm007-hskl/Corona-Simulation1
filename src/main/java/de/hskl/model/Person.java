@@ -138,6 +138,7 @@ public class Person {
 
     /*
      * Farbcodierung der Person in RGB Farben auf dem Feld
+     * personen auf dem Felsd anzeigen
      * */
 
     public void show() {
@@ -175,10 +176,13 @@ public class Person {
 
 
     public boolean isAbleToInfect(float reproduction) {
+        //Mit einer bestimmten Wahrscheinlichkeit wird vielleicht übertragen
         if (infectCounter < reproduction * 10.0f) {
+            //person wird übertragen
             canInfect = true;
             infectCounter += 10;
         } else {
+            //person wird nicht übertragen
             canInfect = false;
         }
         return canInfect;
