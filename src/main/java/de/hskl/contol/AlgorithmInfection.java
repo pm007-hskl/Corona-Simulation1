@@ -1,6 +1,6 @@
 /*
  * MIT License
- * Copyright (c) 2020 Yannis Heim, Stefan Böbel
+ * Copyright (c) 2020 Wissam Aalamareen, Zouhir El Kharboubi
 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
