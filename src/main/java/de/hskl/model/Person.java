@@ -18,6 +18,7 @@ public class Person {
     private PVector move;
     private HealthStatus currentHealthStatus;
     private float radiusPerson = 7f;
+    private boolean isAtRisk = false;
     private int daysOfInfection = 0;
     private int daysCounter = 0;
     private boolean canInfect = false;
@@ -46,6 +47,14 @@ public class Person {
 
     public void setCurrentHealthStatus(HealthStatus currentHealthStatus) {
         this.currentHealthStatus = currentHealthStatus;
+    }
+
+    public boolean getisAtRisk() {
+        return isAtRisk;
+    }
+
+    public void setisAtRisk() {
+        isAtRisk = true;
     }
 
     public int getDaysOfInfection() {

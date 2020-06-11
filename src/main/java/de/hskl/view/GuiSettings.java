@@ -26,7 +26,7 @@ public class GuiSettings {
 
 
     public static GCustomSlider buildSliderForNumberPerson(PApplet p, GCustomSlider numPerson) {
-        numPerson = new GCustomSlider(p, 5, 170, 200, 100, "grey_blue");
+        numPerson = new GCustomSlider(p, 5, 140, 200, 100, "grey_blue");
         numPerson.setShowValue(true);
         numPerson.setShowLimits(true);
         numPerson.setLimits(100, 100, 1000);
@@ -40,7 +40,7 @@ public class GuiSettings {
 
 
     public static GCustomSlider buildSliderForNumberStartInfects( PApplet p, GCustomSlider numStartInfections) {
-        numStartInfections = new GCustomSlider(p, 5, 270, 200, 100, "grey_blue");
+        numStartInfections = new GCustomSlider(p, 5, 210, 200, 100, "grey_blue");
         numStartInfections.setShowValue(true);
         numStartInfections.setShowLimits(true);
         numStartInfections.setLimits(4, 0, 100);
@@ -54,7 +54,7 @@ public class GuiSettings {
 
 
     public static GCustomSlider buildSliderForDeathratio( PApplet p, GCustomSlider deathratio) {
-        deathratio = new GCustomSlider(p, 5, 370, 200, 100, "grey_blue");
+        deathratio = new GCustomSlider(p, 5, 280, 200, 100, "grey_blue");
         deathratio.setShowValue(true);
         deathratio.setShowLimits(true);
         deathratio.setLimits(1,0,100);
@@ -64,5 +64,18 @@ public class GuiSettings {
         deathratio.setNumberFormat(G4P.DECIMAL,0);
         deathratio.setOpaque(false);
         return deathratio;
+    }
+
+    public static GCustomSlider buildSliderForPeopleAtRisk( PApplet p, GCustomSlider PeopleAtRisk) {
+        PeopleAtRisk = new GCustomSlider(p, 5, 350, 200, 100, "grey_blue");
+        PeopleAtRisk.setShowValue(true);
+        PeopleAtRisk.setShowLimits(true);
+        PeopleAtRisk.setLimits(0,0,100);
+        PeopleAtRisk.setNbrTicks(11);
+        PeopleAtRisk.setShowTicks(true);
+        PeopleAtRisk.setEasing(1.0f);
+        PeopleAtRisk.setNumberFormat(G4P.INTEGER,0);
+        PeopleAtRisk.setOpaque(false);
+        return PeopleAtRisk;
     }
 }

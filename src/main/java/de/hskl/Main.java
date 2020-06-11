@@ -18,10 +18,13 @@ public class Main extends PApplet {
     GCustomSlider numPerson;
     GCustomSlider numStartInfections;
     GCustomSlider deathratio;
+    GCustomSlider peopleAtRisk;
     private float GuiBasicReproductionRatioValue = 2.0f;
     private int GuiNumPersonValue = 100;
     private int GuiNumStartInfectionsValue = 4;
     private float GuiDeathRatio = 1.0f;
+    private float GuiPeopleAtRisk = 0.0f;
+    //private int AbsPeopleAtRisk= (int) (GuiPeopleAtRisk/100.0f)*GuiNumPersonValue;
     public Person[] persons = new Person[100];
     public static GCustomSlider slider;
     public static GButton btnstart;
@@ -85,20 +88,25 @@ public class Main extends PApplet {
 
 
         GGroup groupOfLabelNumPerson = new GGroup(this);
-        GLabel labelNumPerson = new GLabel(this, 0, 170, 200, 30, "Gesamtanzahl der Personen");
+        GLabel labelNumPerson = new GLabel(this, 0, 140, 200, 30, "Gesamtanzahl der Personen");
         numPerson = GuiSettings.buildSliderForNumberPerson(this, numPerson);
         groupOfLabelReprRatio.addControls(labelNumPerson, numPerson);
 
 
         GGroup groupOfLabelNumStartInfects = new GGroup(this);
-        GLabel labelNumInfects = new GLabel(this, 0, 270, 200, 30, "Anzahl der Infizierte am Anfang");
+        GLabel labelNumInfects = new GLabel(this, 0, 210, 200, 30, "Anzahl der Infizierte am Anfang");
         numStartInfections = GuiSettings.buildSliderForNumberStartInfects(this, numStartInfections);
         groupOfLabelReprRatio.addControls(labelNumInfects, numStartInfections);
 
-        GGroup groupOfLabelDeathRatio=new GGroup(this);
-        GLabel labelDeathRation=new GLabel(this,0,370,200,30,"Sterblichkeitsrate in %");
-        deathratio=GuiSettings.buildSliderForDeathratio(this,deathratio);
-        groupOfLabelDeathRatio.addControls(labelDeathRation,deathratio);
+        GGroup groupOfLabelDeathRatio = new GGroup(this);
+        GLabel labelDeathRation = new GLabel(this, 0, 280, 200, 30, "Sterblichkeitsrate in %");
+        deathratio = GuiSettings.buildSliderForDeathratio(this, deathratio);
+        groupOfLabelDeathRatio.addControls(labelDeathRation, deathratio);
+
+        GGroup groupOfLabelPeopleAtRisk = new GGroup(this);
+        GLabel labelPeopleAtRisk = new GLabel(this, 0, 350, 200, 30, "Prozentualer Anteil an Leuten in Risikogruppe");
+        peopleAtRisk = GuiSettings.buildSliderForPeopleAtRisk(this, peopleAtRisk);
+        groupOfLabelPeopleAtRisk.addControls(labelPeopleAtRisk, peopleAtRisk);
 
         //frameRate(30); // Test feste Framerate
     }
@@ -127,6 +135,12 @@ public class Main extends PApplet {
                 persons[i].setCurrentHealthStatus(INFECTED);
             }
         }
+        float AbsPeopleAtRisk = (GuiPeopleAtRisk / 100.0f) * (float) GuiNumPersonValue;
+        int AbsPeopleAtRiskAsInt = (int) AbsPeopleAtRisk;
+        for (int i = 0; i < AbsPeopleAtRiskAsInt; i++) {
+            persons[i].setisAtRisk();
+        }
+
     }
 
 
@@ -192,9 +206,16 @@ public class Main extends PApplet {
                 } else {
                     persons[i].riseCounter();
                 }
+                /*
+                Todeswahrscheinlichkeit = GuiDeathRatio, es wird ein Wert zwischen 1 und 1000 gewürfelt,
+                wenn dieser kleiner oder gleich DeathRatio ist stirbt die Person.
+                Falls eine Person teil der Risikogruppe ist erhöht sich die Sterbewahrscheinlichkeit auf das 3-fache
+                 */
 
-                //Todeswahrscheinlichkeit 0,8%, es wird ein Wert zwischen 1 und 1000 gewürfelt, wenn dieser kleiner oder gleich 8 ist stirbt die Person
-                if (((int) (Math.random() * 1000) + 1 <= GuiDeathRatio*10) && (persons[i].getIsSafe() == false)) {
+
+                if (((int) (Math.random() * 1000) + 1 <= GuiDeathRatio * 10.0f) && (persons[i].getIsSafe() == false) && persons[i].getisAtRisk() == false) {
+                    persons[i].setCurrentHealthStatus(DEAD);
+                } else if (persons[i].getisAtRisk() == true && persons[i].getIsSafe() == false && (int) (Math.random() * 1000) + 1 <= GuiDeathRatio * 10.0f * 3.0f) {
                     persons[i].setCurrentHealthStatus(DEAD);
                 } else {
                     persons[i].setIsSafe(true);
@@ -227,8 +248,11 @@ public class Main extends PApplet {
             GuiNumStartInfectionsValue = slider.getValueI();
             //System.out.println("Anzahl Start Infizierte" + numStartInfectionsValue);
         }
-        if(slider==deathratio){
+        if (slider == deathratio) {
             GuiDeathRatio = MathGValueControl.roundOneDigit(slider);
+        }
+        if (slider == peopleAtRisk) {
+            GuiPeopleAtRisk = slider.getValueI();
         }
     }
 
