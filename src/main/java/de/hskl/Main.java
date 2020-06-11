@@ -17,9 +17,11 @@ public class Main extends PApplet {
     GCustomSlider basicReproductionRatio;
     GCustomSlider numPerson;
     GCustomSlider numStartInfections;
+    GCustomSlider deathratio;
     private float GuiBasicReproductionRatioValue = 2.0f;
     private int GuiNumPersonValue = 100;
     private int GuiNumStartInfectionsValue = 4;
+    private float GuiDeathRatio = 1.0f;
     public Person[] persons = new Person[100];
     public static GCustomSlider slider;
     public static GButton btnstart;
@@ -92,6 +94,11 @@ public class Main extends PApplet {
         GLabel labelNumInfects = new GLabel(this, 0, 270, 200, 30, "Anzahl der Infizierte am Anfang");
         numStartInfections = GuiSettings.buildSliderForNumberStartInfects(this, numStartInfections);
         groupOfLabelReprRatio.addControls(labelNumInfects, numStartInfections);
+
+        GGroup groupOfLabelDeathRatio=new GGroup(this);
+        GLabel labelDeathRation=new GLabel(this,0,370,200,30,"Sterblichkeitsrate in %");
+        deathratio=GuiSettings.buildSliderForDeathratio(this,deathratio);
+        groupOfLabelDeathRatio.addControls(labelDeathRation,deathratio);
 
         //frameRate(30); // Test feste Framerate
     }
@@ -187,7 +194,7 @@ public class Main extends PApplet {
                 }
 
                 //Todeswahrscheinlichkeit 0,8%, es wird ein Wert zwischen 1 und 1000 gewürfelt, wenn dieser kleiner oder gleich 8 ist stirbt die Person
-                if (((int) (Math.random() * 1000) + 1 <= 8) && (persons[i].getIsSafe() == false)) {
+                if (((int) (Math.random() * 1000) + 1 <= GuiDeathRatio*10) && (persons[i].getIsSafe() == false)) {
                     persons[i].setCurrentHealthStatus(DEAD);
                 } else {
                     persons[i].setIsSafe(true);
@@ -219,6 +226,9 @@ public class Main extends PApplet {
         if (slider == numStartInfections) {
             GuiNumStartInfectionsValue = slider.getValueI();
             //System.out.println("Anzahl Start Infizierte" + numStartInfectionsValue);
+        }
+        if(slider==deathratio){
+            GuiDeathRatio = MathGValueControl.roundOneDigit(slider);
         }
     }
 

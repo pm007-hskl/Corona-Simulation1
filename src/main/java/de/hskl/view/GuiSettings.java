@@ -51,4 +51,18 @@ public class GuiSettings {
         numStartInfections.setOpaque(false);
         return numStartInfections;
     }
+
+
+    public static GCustomSlider buildSliderForDeathratio( PApplet p, GCustomSlider deathratio) {
+        deathratio = new GCustomSlider(p, 5, 370, 200, 100, "grey_blue");
+        deathratio.setShowValue(true);
+        deathratio.setShowLimits(true);
+        deathratio.setLimits(1,0,100);
+        deathratio.setNbrTicks(11);
+        deathratio.setShowTicks(true);
+        deathratio.setEasing(1.0f);
+        deathratio.setNumberFormat(G4P.DECIMAL,0);
+        deathratio.setOpaque(false);
+        return deathratio;
+    }
 }
