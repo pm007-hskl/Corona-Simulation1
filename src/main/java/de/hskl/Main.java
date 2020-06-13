@@ -1,6 +1,7 @@
 package de.hskl;
 
 import de.hskl.contol.AlgorithmInfection;
+import de.hskl.contol.MaskDistanceController;
 import de.hskl.util.MathGValueControl;
 import de.hskl.model.Person;
 import de.hskl.view.GuiSettings;
@@ -21,12 +22,14 @@ public class Main extends PApplet {
     GCustomSlider peopleAtRisk;
     GCheckbox Mask;
     GCheckbox Distance;
+    private boolean masked = false;
     private float GuiBasicReproductionRatioValue = 2.0f;
     private int GuiNumPersonValue = 100;
     private int GuiNumStartInfectionsValue = 4;
     private float GuiDeathRatio = 1.0f;
     private float GuiPeopleAtRisk = 0.0f;
     public Person[] persons = new Person[100];
+    public MaskDistanceController maskdistanceController = new MaskDistanceController(false, false);
     public static GCustomSlider slider;
     public static GButton btnstart;
     public static GButton btnstop;
@@ -109,9 +112,9 @@ public class Main extends PApplet {
         peopleAtRisk = GuiSettings.buildSliderForPeopleAtRisk(this, peopleAtRisk);
         groupOfLabelPeopleAtRisk.addControls(labelPeopleAtRisk, peopleAtRisk);
         strokeWeight(1);
-        Mask=GuiSettings.buildCheckboxForMask(this,Mask);
+        Mask = GuiSettings.buildCheckboxForMask(this, Mask);
 
-        Distance=GuiSettings.buildCheckboxForDistance(this,Distance);
+        Distance = GuiSettings.buildCheckboxForDistance(this, Distance);
         strokeWeight(strokeWeightValue);
         //frameRate(30); // Test feste Framerate
     }
@@ -123,6 +126,7 @@ public class Main extends PApplet {
      * */
 
     private void initialize() {
+
         if (GuiNumPersonValue >= GuiNumStartInfectionsValue) {
             for (int i = 0; i < GuiNumPersonValue; i++) {
                 persons[i] = new Person(this, strokeWeightValue);
@@ -144,6 +148,26 @@ public class Main extends PApplet {
         int AbsPeopleAtRiskAsInt = (int) AbsPeopleAtRisk;
         for (int i = 0; i < AbsPeopleAtRiskAsInt; i++) {
             persons[i].setisAtRisk();
+        }
+
+        for(int i=0;i<persons.length;i++){
+            if(persons[i].getCurrentHealthStatus()==INFECTED){
+                if(maskdistanceController.isMasked() && !maskdistanceController.isDistance()){
+                    persons[i].setMasked(true);
+                    persons[i].setDistanceOK(false);
+                }else if(maskdistanceController.isMasked() && maskdistanceController.isDistance()){
+                    persons[i].setMasked(true);
+                    persons[i].setDistanceOK(true);
+                }else if(!maskdistanceController.isMasked() && maskdistanceController.isDistance()){
+                    persons[i].setMasked(false);
+                    persons[i].setDistanceOK(true);
+                }
+            }
+        }
+        for (int i = 0; i < persons.length; i++) {
+            if (persons[i].getCurrentHealthStatus() == INFECTED) {
+                System.out.println(persons[i].isMasked()+" "+persons[i].isDistanceOK());
+            }
         }
 
     }
@@ -203,7 +227,7 @@ public class Main extends PApplet {
          * */
         for (int i = 0; i < persons.length; i++) {
 
-            if (persons[i].isStoped()==false && persons[i].getCurrentHealthStatus() == INFECTED) {
+            if (persons[i].isStoped() == false && persons[i].getCurrentHealthStatus() == INFECTED) {
 
                 //300 Frames entsprechen einem Tag
                 if (persons[i].getDaysCounter() >= 300) {
@@ -271,21 +295,27 @@ public class Main extends PApplet {
             initialize();
         }
         if (button == btnstop && event == GEvent.CLICKED) {
-            for(int i=0;i<persons.length;i++){
+            for (int i = 0; i < persons.length; i++) {
                 persons[i].stopMotion();
             }
         }
     }
-    public  void handleToggleControlEvents(GToggleControl box,GEvent event){
-        if(Mask.isSelected()==true){
-            for(int i=0;i<persons.length;i++){
-                if(persons[i].getCurrentHealthStatus()==INFECTED){
-                    persons[i].setMasked();
-                }
-            }
+
+    public void handleToggleControlEvents(GToggleControl box, GEvent event) {
+        if (Mask.isSelected() == true && Distance.isSelected() == false) {
+            maskdistanceController.setMasked(true);
+            maskdistanceController.setDistance(false);
+            System.out.println("called 1 0");
         }
-        else if(Distance.isSelected()==true){
-            System.out.println("YESYES");
+        if (Mask.isSelected() == true && Distance.isSelected() == true) {
+            maskdistanceController.setMasked(true);
+            maskdistanceController.setDistance(true);
+            System.out.println("called 1 1");
+        }
+        if (Mask.isSelected() == false && Distance.isSelected() == true) {
+            maskdistanceController.setMasked(false);
+            maskdistanceController.setDistance(true);
+            System.out.println("called 0 1");
         }
     }
 

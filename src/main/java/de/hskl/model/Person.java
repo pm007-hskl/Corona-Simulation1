@@ -20,6 +20,7 @@ public class Person {
     private float radiusPerson = 7f;
     private boolean isAtRisk = false;
     private boolean masked=false;
+    private boolean distanceOK= false;
     private int daysOfInfection = 0;
     private int daysCounter = 0;
     private boolean canInfect = false;
@@ -79,8 +80,16 @@ public class Person {
         return masked;
     }
 
-    public void setMasked() {
-        this.masked = true;
+    public void setMasked(boolean masked) {
+        this.masked = masked;
+    }
+
+    public boolean isDistanceOK() {
+        return distanceOK;
+    }
+
+    public void setDistanceOK(boolean distanceOK) {
+        this.distanceOK = distanceOK;
     }
 
     public boolean isStoped() {
