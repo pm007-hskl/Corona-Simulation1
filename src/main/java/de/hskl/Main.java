@@ -198,7 +198,7 @@ public class Main extends PApplet {
          * */
         for (int i = 0; i < persons.length; i++) {
 
-            if (persons[i].getCurrentHealthStatus() == INFECTED) {
+            if (persons[i].isStoped()==false && persons[i].getCurrentHealthStatus() == INFECTED) {
 
                 //300 Frames entsprechen einem Tag
                 if (persons[i].getDaysCounter() >= 300) {
@@ -264,10 +264,11 @@ public class Main extends PApplet {
         if (button == btnstart && event == GEvent.CLICKED) {
             persons = new Person[GuiNumPersonValue];
             initialize();
-            loop();
         }
         if (button == btnstop && event == GEvent.CLICKED) {
-            noLoop();
+            for(int i=0;i<persons.length;i++){
+                persons[i].stopMotion();
+            }
         }
     }
 

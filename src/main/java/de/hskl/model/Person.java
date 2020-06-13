@@ -25,6 +25,7 @@ public class Person {
     private int infectCounter = 0;
     private boolean isSafe = false;
     private int strokeWeightValue;
+    private boolean stoped = false;
 
     public Person(PApplet p, int strokeWeightValue) {
         this.p = p;
@@ -73,11 +74,19 @@ public class Person {
         isSafe = value;
     }
 
+    public boolean isStoped() {
+        return stoped;
+    }
 
     public void generateRandomPosition(int strokeWeightValue) {
         position = new PVector(p.random(200 + strokeWeightValue, p.width), p.random(0, p.height));
     }
 
+    public void stopMotion() {
+        move.x = 0;
+        move.y = 0;
+        stoped = true;
+    }
 
 
     /*
@@ -142,6 +151,16 @@ public class Person {
         } else {
             p.stroke(0, 51, 255);
             p.point(position.x, position.y);
+        }
+
+        //zeichnet Kreuz in den Punkt wenn Person teil der Risikogruppe ist
+        if (isAtRisk == true) {
+            p.stroke(0);
+            p.strokeWeight(2);
+            p.line(position.x - strokeWeightValue / 2.0f, position.y, position.x + strokeWeightValue / 2.0f, position.y);
+            p.line(position.x, position.y - strokeWeightValue / 2.0f, position.x, position.y + strokeWeightValue / 2.0f);
+            p.strokeWeight(strokeWeightValue);
+
         }
     }
 
