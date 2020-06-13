@@ -1,6 +1,7 @@
 package de.hskl.view;
 
 import g4p_controls.G4P;
+import g4p_controls.GCheckbox;
 import g4p_controls.GCustomSlider;
 import processing.core.PApplet;
 
@@ -77,5 +78,15 @@ public class GuiSettings {
         PeopleAtRisk.setNumberFormat(G4P.INTEGER,0);
         PeopleAtRisk.setOpaque(false);
         return PeopleAtRisk;
+    }
+
+    public static GCheckbox buildCheckboxForMask(PApplet p, GCheckbox CheckboxForMask){
+        CheckboxForMask=new GCheckbox(p,5,430,200,12,"Maskenpflicht");
+        return CheckboxForMask;
+    }
+
+    public static GCheckbox buildCheckboxForDistance(PApplet p, GCheckbox CheckboxForDistance){
+        CheckboxForDistance=new GCheckbox(p,5,450,200,12,"Abstandsregelung");
+        return CheckboxForDistance;
     }
 }

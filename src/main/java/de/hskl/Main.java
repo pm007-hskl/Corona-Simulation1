@@ -19,12 +19,13 @@ public class Main extends PApplet {
     GCustomSlider numStartInfections;
     GCustomSlider deathratio;
     GCustomSlider peopleAtRisk;
+    GCheckbox Mask;
+    GCheckbox Distance;
     private float GuiBasicReproductionRatioValue = 2.0f;
     private int GuiNumPersonValue = 100;
     private int GuiNumStartInfectionsValue = 4;
     private float GuiDeathRatio = 1.0f;
     private float GuiPeopleAtRisk = 0.0f;
-    //private int AbsPeopleAtRisk= (int) (GuiPeopleAtRisk/100.0f)*GuiNumPersonValue;
     public Person[] persons = new Person[100];
     public static GCustomSlider slider;
     public static GButton btnstart;
@@ -107,7 +108,11 @@ public class Main extends PApplet {
         GLabel labelPeopleAtRisk = new GLabel(this, 0, 350, 200, 30, "Prozentualer Anteil an Leuten in Risikogruppe");
         peopleAtRisk = GuiSettings.buildSliderForPeopleAtRisk(this, peopleAtRisk);
         groupOfLabelPeopleAtRisk.addControls(labelPeopleAtRisk, peopleAtRisk);
+        strokeWeight(1);
+        Mask=GuiSettings.buildCheckboxForMask(this,Mask);
 
+        Distance=GuiSettings.buildCheckboxForDistance(this,Distance);
+        strokeWeight(strokeWeightValue);
         //frameRate(30); // Test feste Framerate
     }
 
@@ -269,6 +274,18 @@ public class Main extends PApplet {
             for(int i=0;i<persons.length;i++){
                 persons[i].stopMotion();
             }
+        }
+    }
+    public  void handleToggleControlEvents(GToggleControl box,GEvent event){
+        if(Mask.isSelected()==true){
+            for(int i=0;i<persons.length;i++){
+                if(persons[i].getCurrentHealthStatus()==INFECTED){
+                    persons[i].setMasked();
+                }
+            }
+        }
+        else if(Distance.isSelected()==true){
+            System.out.println("YESYES");
         }
     }
 

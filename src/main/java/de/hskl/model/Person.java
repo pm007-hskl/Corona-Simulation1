@@ -19,6 +19,7 @@ public class Person {
     private HealthStatus currentHealthStatus;
     private float radiusPerson = 7f;
     private boolean isAtRisk = false;
+    private boolean masked=false;
     private int daysOfInfection = 0;
     private int daysCounter = 0;
     private boolean canInfect = false;
@@ -72,6 +73,14 @@ public class Person {
 
     public void setIsSafe(boolean value) {
         isSafe = value;
+    }
+
+    public boolean isMasked() {
+        return masked;
+    }
+
+    public void setMasked() {
+        this.masked = true;
     }
 
     public boolean isStoped() {
