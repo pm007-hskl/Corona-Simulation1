@@ -2,9 +2,7 @@
 
 
 ## Simulator
-
 Dies ist eine Simulation zur Visualisierung der Verteilung der Coronapandemie
-=============================================
 
 - Nach Auswahl der Gesamtanzahl der Personen, Reproduktionszahl R0 und der Anzahl der infizierte am Anfang, kann das Programm gestartet werden
 - Während der Simulation wird die Anzahl gesunder, infizierter, geheilter und toter Menschen angezeigt
