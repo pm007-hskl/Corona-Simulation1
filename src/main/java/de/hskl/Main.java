@@ -2,7 +2,7 @@ package de.hskl;
 
 import de.hskl.contol.AlgorithmInfection;
 import de.hskl.contol.MaskDistanceController;
-import de.hskl.util.MathGValueControl;
+import de.hskl.util.MathUtil;
 import de.hskl.model.Person;
 import de.hskl.view.GuiSettings;
 import g4p_controls.*;
@@ -267,7 +267,7 @@ public class Main extends PApplet {
 
     public void handleSliderEvents(GValueControl slider, GEvent event) {
         if (slider == basicReproductionRatio) {
-            GuiBasicReproductionRatioValue = MathGValueControl.roundOneDigit(slider);
+            GuiBasicReproductionRatioValue = MathUtil.roundOneDigit(slider.getValueF());
             //System.out.println("Reproduktionszahl: " + basicReproductionRatioValue);
         }
         if (slider == numPerson) {
@@ -279,7 +279,7 @@ public class Main extends PApplet {
             //System.out.println("Anzahl Start Infizierte" + numStartInfectionsValue);
         }
         if (slider == deathratio) {
-            GuiDeathRatio = MathGValueControl.roundOneDigit(slider);
+            GuiDeathRatio = MathUtil.roundOneDigit(slider.getValueF());
         }
         if (slider == peopleAtRisk) {
             GuiPeopleAtRisk = slider.getValueI();
