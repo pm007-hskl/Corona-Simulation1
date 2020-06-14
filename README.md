@@ -1,7 +1,7 @@
-# PM007-C1
+# PM007
 
 
-# Simulator
+## Simulator
 
 Dies ist eine Simulation zur Visualisierung der Verteilung der Coronapandemie
 =============================================
@@ -38,7 +38,7 @@ SOFTWARE.
 
 
 
-### Installationsanweisung um ein Mavenprojekt zu starten
+## Installationsanweisung um ein Mavenprojekt zu starten
 Hier wird exemplarisch ein Mavenprojekt in dem Editor *Eclipse* geöffnet. Das Vorgehen kann in anderen Editoren etwas unterschiedlich sein.
 
 1. Source Code als ZIP-Datei herunterladen
