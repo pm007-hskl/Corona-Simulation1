@@ -15,13 +15,13 @@ import static de.hskl.model.HealthStatus.*;
 
 public class Main extends PApplet {
 
-    GCustomSlider basicReproductionRatio;
-    GCustomSlider numPerson;
-    GCustomSlider numStartInfections;
-    GCustomSlider deathratio;
-    GCustomSlider peopleAtRisk;
-    GCheckbox Mask;
-    GCheckbox Distance;
+    public static GCustomSlider basicReproductionRatio;
+    public static GCustomSlider numPerson;
+    public static GCustomSlider numStartInfections;
+    public static GCustomSlider deathratio;
+    public static GCustomSlider peopleAtRisk;
+    public static GCheckbox Mask;
+    public static GCheckbox Distance;
     private boolean masked = false;
     private float GuiBasicReproductionRatioValue = 2.0f;
     private int GuiNumPersonValue = 100;
@@ -185,6 +185,7 @@ public class Main extends PApplet {
             persons[i].move();
             persons[i].show();
         }
+        
         //Zählt bei jedem durchlauf die Anzahl toter,gesunder,geheilter und infizierter Menschen
         for (int i = 0; i < persons.length; i++) {
             switch (persons[i].getCurrentHealthStatus()) {
