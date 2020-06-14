@@ -50,7 +50,7 @@ public class GuiSettings {
 
 
     public static GCustomSlider buildSliderForNumberPerson(PApplet p, GCustomSlider numPerson) {
-        numPerson = new GCustomSlider(p, 5, 140, 200, 100, "grey_blue");
+        numPerson = new GCustomSlider(p, 5, 150, 200, 100, "grey_blue");
         numPerson.setShowValue(true);
         numPerson.setShowLimits(true);
         numPerson.setLimits(100, 100, 1000);
@@ -64,7 +64,7 @@ public class GuiSettings {
 
 
     public static GCustomSlider buildSliderForNumberStartInfects( PApplet p, GCustomSlider numStartInfections) {
-        numStartInfections = new GCustomSlider(p, 5, 210, 200, 100, "grey_blue");
+        numStartInfections = new GCustomSlider(p, 5, 220, 200, 100, "grey_blue");
         numStartInfections.setShowValue(true);
         numStartInfections.setShowLimits(true);
         numStartInfections.setLimits(4, 0, 100);
@@ -78,7 +78,7 @@ public class GuiSettings {
 
 
     public static GCustomSlider buildSliderForDeathratio( PApplet p, GCustomSlider deathratio) {
-        deathratio = new GCustomSlider(p, 5, 280, 200, 100, "grey_blue");
+        deathratio = new GCustomSlider(p, 5, 290, 200, 100, "grey_blue");
         deathratio.setShowValue(true);
         deathratio.setShowLimits(true);
         deathratio.setLimits(1,0,100);
@@ -91,7 +91,7 @@ public class GuiSettings {
     }
 
     public static GCustomSlider buildSliderForPeopleAtRisk( PApplet p, GCustomSlider PeopleAtRisk) {
-        PeopleAtRisk = new GCustomSlider(p, 5, 350, 200, 100, "grey_blue");
+        PeopleAtRisk = new GCustomSlider(p, 5, 360, 200, 100, "grey_blue");
         PeopleAtRisk.setShowValue(true);
         PeopleAtRisk.setShowLimits(true);
         PeopleAtRisk.setLimits(0,0,100);
@@ -104,12 +104,12 @@ public class GuiSettings {
     }
 
     public static GCheckbox buildCheckboxForMask(PApplet p, GCheckbox CheckboxForMask){
-        CheckboxForMask=new GCheckbox(p,5,430,200,12,"Maskenpflicht");
+        CheckboxForMask=new GCheckbox(p,5,450,200,15,"Maskenpflicht");
         return CheckboxForMask;
     }
 
     public static GCheckbox buildCheckboxForDistance(PApplet p, GCheckbox CheckboxForDistance){
-        CheckboxForDistance=new GCheckbox(p,5,450,200,12,"Abstandsregelung");
+        CheckboxForDistance=new GCheckbox(p,5,470,200,15,"Abstandsregelung");
         return CheckboxForDistance;
     }
 }

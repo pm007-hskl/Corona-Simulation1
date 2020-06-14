@@ -37,6 +37,8 @@ package de.hskl;
 
 import de.hskl.contol.AlgorithmInfection;
 import de.hskl.contol.MaskDistanceController;
+import de.hskl.model.HealthStatus;
+import de.hskl.model.StatusPoint;
 import de.hskl.util.MathUtil;
 import de.hskl.model.Person;
 import de.hskl.view.GuiSettings;
@@ -76,9 +78,10 @@ public class Main extends PApplet {
     public static int infectedCounter = 0;
     public static int deadCounter = 0;
     public static int healedCounter = 0;
-    public static Font font = new Font("TimesRoman", Font.PLAIN, 20);
+    public static Font font = new Font("TimesRoman", Font.PLAIN, 16);
     public static int strokeWeightValue = 8; //dicke der Punkte definiert
     public static int frameCounter = 0; // Test feste Framerate
+    public static StatusPoint h2;
 
 
     public static void main(String[] args) {
@@ -97,10 +100,10 @@ public class Main extends PApplet {
          * Erzeugen der Buttons
          * */
 
-        btnstart = new GButton(this, 10, 20, 140, 20, "START");
+        btnstart = new GButton(this, 32, 20, 140, 20, "START");
         btnstart.setLocalColorScheme(GCScheme.CYAN_SCHEME);
 
-        btnstop = new GButton(this, 10, 50, 140, 20, "STOP");
+        btnstop = new GButton(this, 32, 50, 140, 20, "STOP");
         btnstop.setLocalColorScheme(GCScheme.RED_SCHEME);
 
         healthyState = new GLabel(this, 0, 500, 200, 100);
@@ -108,6 +111,7 @@ public class Main extends PApplet {
 
         infectedState = new GLabel(this, 0, 570, 200, 100);
         infectedState.setFont(font);
+        h2 = new StatusPoint(this, 200,200,200).setxPos(10).setyPos(550).setStroke(10);
 
         deadState = new GLabel(this, 0, 640, 200, 100);
         deadState.setFont(font);
@@ -121,32 +125,33 @@ public class Main extends PApplet {
          * */
 
         GGroup groupOfLabelReprRatio = new GGroup(this);
-        GLabel labelRepRatio = new GLabel(this, 0, 70, 200, 30, "Reproduktionszahl");
+        GLabel labelRepRatio = new GLabel(this, 50, 65, 200, 46, "Reproduktionszahl");
         basicReproductionRatio = GuiSettings.buildSliderForBasicReproductionRatio(this, basicReproductionRatio);
         groupOfLabelReprRatio.addControls(labelRepRatio, basicReproductionRatio);
 
 
         GGroup groupOfLabelNumPerson = new GGroup(this);
-        GLabel labelNumPerson = new GLabel(this, 0, 140, 200, 30, "Gesamtanzahl der Personen");
+        GLabel labelNumPerson = new GLabel(this, 25, 145, 200, 45, "Gesamtanzahl der Personen");
         numPerson = GuiSettings.buildSliderForNumberPerson(this, numPerson);
         groupOfLabelReprRatio.addControls(labelNumPerson, numPerson);
 
 
         GGroup groupOfLabelNumStartInfects = new GGroup(this);
-        GLabel labelNumInfects = new GLabel(this, 0, 210, 200, 30, "Anzahl der Infizierte am Anfang");
+        GLabel labelNumInfects = new GLabel(this, 20, 215, 200, 45, "Anzahl der Infizierte am Anfang");
         numStartInfections = GuiSettings.buildSliderForNumberStartInfects(this, numStartInfections);
         groupOfLabelReprRatio.addControls(labelNumInfects, numStartInfections);
 
         GGroup groupOfLabelDeathRatio = new GGroup(this);
-        GLabel labelDeathRation = new GLabel(this, 0, 280, 200, 30, "Sterblichkeitsrate in %");
+        GLabel labelDeathRation = new GLabel(this, 45, 285, 200, 45, "Sterblichkeitsrate in %");
         deathratio = GuiSettings.buildSliderForDeathratio(this, deathratio);
         groupOfLabelDeathRatio.addControls(labelDeathRation, deathratio);
 
         GGroup groupOfLabelPeopleAtRisk = new GGroup(this);
-        GLabel labelPeopleAtRisk = new GLabel(this, 0, 350, 200, 30, "Prozentualer Anteil an Leuten in Risikogruppe");
+        GLabel labelPeopleAtRisk = new GLabel(this, 37, 355, 200, 45, "Risikogruppenanteil in %");
         peopleAtRisk = GuiSettings.buildSliderForPeopleAtRisk(this, peopleAtRisk);
         groupOfLabelPeopleAtRisk.addControls(labelPeopleAtRisk, peopleAtRisk);
         strokeWeight(1);
+
         Mask = GuiSettings.buildCheckboxForMask(this, Mask);
 
         Distance = GuiSettings.buildCheckboxForDistance(this, Distance);
@@ -180,7 +185,8 @@ public class Main extends PApplet {
             }
         }
 
-        
+
+
         float AbsPeopleAtRisk = (GuiPeopleAtRisk / 100.0f) * (float) GuiNumPersonValue;
         int AbsPeopleAtRiskAsInt = (int) AbsPeopleAtRisk;
         for (int i = 0; i < AbsPeopleAtRiskAsInt; i++) {
@@ -217,6 +223,7 @@ public class Main extends PApplet {
         strokeWeight(strokeWeightValue);
         rect(0, 0, 200, height);
 
+
         // Person anzeigen und bewegung berechnen
         for (int i = 0; i < persons.length; i++) {
             persons[i].move();
@@ -247,16 +254,22 @@ public class Main extends PApplet {
          * Gui Werte aktualiseren
          * */
 
-        healthyState.setText("Anzahl gesunder Menschen: " + healthyCounter);
-        healthyCounter = 0;
+        healthyState.setText(healthyCounter + " Gesunde");
 
-        infectedState.setText("Anzahl infizierter Menschen: " + infectedCounter);
+
+
+        healthyCounter = 0;
+       /* StatusPoint h1 = new StatusPoint(this, 0,100, 0).setxPos(10).setyPos(500).setStroke(10);
+
+        h1.show();*/
+        h2.show();
+        infectedState.setText(infectedCounter + " Gesunde (infizierte)");
         infectedCounter = 0;
 
-        deadState.setText("Anzahl Tote: " + deadCounter);
+        deadState.setText(deadCounter + " Tote");
         deadCounter = 0;
 
-        healedState.setText("Anzahl geheilter Personen: " + healedCounter);
+        healedState.setText(healedCounter + " Geheilte");
         healedCounter = 0;
 
 
