@@ -102,4 +102,6 @@ public class StatusPoint {
         p.stroke(colorR, colorG, colorB);
         p.ellipse(xPos, yPos,  width, height);
     }
+
+
 }

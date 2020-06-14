@@ -37,7 +37,6 @@ package de.hskl;
 
 import de.hskl.contol.AlgorithmInfection;
 import de.hskl.contol.MaskDistanceController;
-import de.hskl.model.HealthStatus;
 import de.hskl.model.StatusPoint;
 import de.hskl.util.MathUtil;
 import de.hskl.model.Person;
@@ -81,7 +80,10 @@ public class Main extends PApplet {
     public static Font font = new Font("TimesRoman", Font.PLAIN, 16);
     public static int strokeWeightValue = 8; //dicke der Punkte definiert
     public static int frameCounter = 0; // Test feste Framerate
-    public static StatusPoint h2;
+    public static StatusPoint infectedStatePoint;
+    public static StatusPoint healthyStatePoint;
+    public static StatusPoint deadStatePoint;
+    public static StatusPoint healedStatePoint;
 
 
     public static void main(String[] args) {
@@ -106,18 +108,21 @@ public class Main extends PApplet {
         btnstop = new GButton(this, 32, 50, 140, 20, "STOP");
         btnstop.setLocalColorScheme(GCScheme.RED_SCHEME);
 
-        healthyState = new GLabel(this, 0, 500, 200, 100);
+        healthyState = new GLabel(this, 25, 500, 200, 100);
         healthyState.setFont(font);
+        healthyStatePoint = new StatusPoint(this, 0,247,0).setxPos(10).setyPos(550).setStroke(10);
 
-        infectedState = new GLabel(this, 0, 570, 200, 100);
+        infectedState = new GLabel(this, 25, 530, 200, 100);
         infectedState.setFont(font);
-        h2 = new StatusPoint(this, 200,200,200).setxPos(10).setyPos(550).setStroke(10);
+        infectedStatePoint = new StatusPoint(this, 255,255,0).setxPos(10).setyPos(580).setStroke(10);
 
-        deadState = new GLabel(this, 0, 640, 200, 100);
+        deadState = new GLabel(this, 25, 560, 200, 100);
         deadState.setFont(font);
+        deadStatePoint = new StatusPoint(this, 255,0,0).setxPos(10).setyPos(610).setStroke(10);
 
-        healedState = new GLabel(this, 0, 710, 200, 100);
+        healedState = new GLabel(this, 25, 590, 200, 100);
         healedState.setFont(font);
+        healedStatePoint = new StatusPoint(this, 0,51,255).setxPos(10).setyPos(640).setStroke(10);
 
 
         /*
@@ -253,22 +258,20 @@ public class Main extends PApplet {
         /*
          * Gui Werte aktualiseren
          * */
-
+        healthyStatePoint.show();
         healthyState.setText(healthyCounter + " Gesunde");
-
-
-
         healthyCounter = 0;
-       /* StatusPoint h1 = new StatusPoint(this, 0,100, 0).setxPos(10).setyPos(500).setStroke(10);
 
-        h1.show();*/
-        h2.show();
-        infectedState.setText(infectedCounter + " Gesunde (infizierte)");
+
+        infectedStatePoint.show();
+        infectedState.setText(infectedCounter + " Infiziert");
         infectedCounter = 0;
 
+        deadStatePoint.show();
         deadState.setText(deadCounter + " Tote");
         deadCounter = 0;
 
+        healedStatePoint.show();
         healedState.setText(healedCounter + " Geheilte");
         healedCounter = 0;
 
