@@ -21,6 +21,18 @@
  * SOFTWARE.
  * */
 
+/*
+* Beschreibung
+*
+* Hier wird eine Technologie genutzt namens "Processing",
+* die spezialisiert ist auf die Erstellung von Grafiken, Simulationen und Animationen.
+* Die Technologie "Processing" ist im engeren Sinne eine Programmiersprache, die auf
+* JAVA basiert. Processing nutzt zum Zeichnen der Visualierungselemte drei Klassen:
+* settings(), setup() und draw(), die hier in der "Main" Klasse zu finden sind.
+* Weiter Informationen hierzu findet man auf https://processing.org/.
+*
+* */
+
 package de.hskl;
 
 import de.hskl.contol.AlgorithmInfection;
@@ -167,6 +179,8 @@ public class Main extends PApplet {
                 persons[i].setCurrentHealthStatus(INFECTED);
             }
         }
+
+        
         float AbsPeopleAtRisk = (GuiPeopleAtRisk / 100.0f) * (float) GuiNumPersonValue;
         int AbsPeopleAtRiskAsInt = (int) AbsPeopleAtRisk;
         for (int i = 0; i < AbsPeopleAtRiskAsInt; i++) {
