@@ -42,8 +42,8 @@ public class Person {
     private HealthStatus currentHealthStatus;
     private float radiusPerson = 7f;
     private boolean isAtRisk = false;
-    private boolean masked=false;
-    private boolean distanceOK= false;
+    private boolean masked = false;
+    private boolean distanceOK = false;
     private int daysOfInfection = 0;
     private int daysCounter = 0;
     private boolean canInfect = false;

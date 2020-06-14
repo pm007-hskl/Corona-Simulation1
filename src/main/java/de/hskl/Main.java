@@ -173,15 +173,15 @@ public class Main extends PApplet {
             persons[i].setisAtRisk();
         }
 
-        for(int i=0;i<persons.length;i++){
-            if(persons[i].getCurrentHealthStatus()==INFECTED){
-                if(maskdistanceController.isMasked() && !maskdistanceController.isDistance()){
+        for (int i = 0; i < persons.length; i++) {
+            if (persons[i].getCurrentHealthStatus() == INFECTED) {
+                if (maskdistanceController.isMasked() && !maskdistanceController.isDistance()) {
                     persons[i].setMasked(true);
                     persons[i].setDistanceOK(false);
-                }else if(maskdistanceController.isMasked() && maskdistanceController.isDistance()){
+                } else if (maskdistanceController.isMasked() && maskdistanceController.isDistance()) {
                     persons[i].setMasked(true);
                     persons[i].setDistanceOK(true);
-                }else if(!maskdistanceController.isMasked() && maskdistanceController.isDistance()){
+                } else if (!maskdistanceController.isMasked() && maskdistanceController.isDistance()) {
                     persons[i].setMasked(false);
                     persons[i].setDistanceOK(true);
                 }
@@ -189,7 +189,7 @@ public class Main extends PApplet {
         }
         for (int i = 0; i < persons.length; i++) {
             if (persons[i].getCurrentHealthStatus() == INFECTED) {
-                System.out.println(persons[i].isMasked()+" "+persons[i].isDistanceOK());
+                System.out.println(persons[i].isMasked() + " " + persons[i].isDistanceOK());
             }
         }
 
@@ -208,7 +208,7 @@ public class Main extends PApplet {
             persons[i].move();
             persons[i].show();
         }
-        
+
         //Zählt bei jedem durchlauf die Anzahl toter,gesunder,geheilter und infizierter Menschen
         for (int i = 0; i < persons.length; i++) {
             switch (persons[i].getCurrentHealthStatus()) {
@@ -245,10 +245,12 @@ public class Main extends PApplet {
         healedState.setText("Anzahl geheilter Personen: " + healedCounter);
         healedCounter = 0;
 
+
         /*
-         * DayTime-Simulator: zählt Frames, um Reproduktionsfaktor zu visualisieren
+         * DayTime-Simulator: zählt die Frames, um den Reproduktionsfaktor zu visualisieren
          * Setzt die Wahrscheinlichkeit, dass ein Infizierter stirbt
          * */
+
         for (int i = 0; i < persons.length; i++) {
 
             if (persons[i].isStoped() == false && persons[i].getCurrentHealthStatus() == INFECTED) {
@@ -259,6 +261,8 @@ public class Main extends PApplet {
                 } else {
                     persons[i].riseCounter();
                 }
+
+
                 /*
                 Todeswahrscheinlichkeit = GuiDeathRatio, es wird ein Wert zwischen 1 und 1000 gewürfelt,
                 wenn dieser kleiner oder gleich DeathRatio ist stirbt die Person.
