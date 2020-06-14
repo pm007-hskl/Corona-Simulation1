@@ -24,5 +24,5 @@
 package de.hskl.model;
 
 
-public enum HealthStatus {INFECTED, HEALTHY, DEAD, HEALED}
+public enum HealthStatus {INFECTED, HEALTHY, DEAD, HEALED, RISK}
 

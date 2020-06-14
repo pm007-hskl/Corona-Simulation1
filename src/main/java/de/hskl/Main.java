@@ -73,10 +73,12 @@ public class Main extends PApplet {
     public static GLabel infectedState;
     public static GLabel deadState;
     public static GLabel healedState;
+    public static GLabel riskState;
     public static int healthyCounter = 0;
     public static int infectedCounter = 0;
     public static int deadCounter = 0;
     public static int healedCounter = 0;
+    public static int riskCounter = 0;
     public static Font font = new Font("TimesRoman", Font.PLAIN, 16);
     public static int strokeWeightValue = 8; //dicke der Punkte definiert
     public static int frameCounter = 0; // Test feste Framerate
@@ -84,6 +86,7 @@ public class Main extends PApplet {
     public static StatusPoint healthyStatePoint;
     public static StatusPoint deadStatePoint;
     public static StatusPoint healedStatePoint;
+    public static StatusPoint riskStatePoint;
 
 
     public static void main(String[] args) {
@@ -123,6 +126,10 @@ public class Main extends PApplet {
         healedState = new GLabel(this, 25, 590, 200, 100);
         healedState.setFont(font);
         healedStatePoint = new StatusPoint(this, 0,51,255).setxPos(10).setyPos(640).setStroke(10);
+
+        riskState = new GLabel(this, 25, 620, 200, 100);
+        riskState.setFont(font);
+        riskStatePoint = new StatusPoint(this, 0,51,255).setxPos(10).setyPos(670).setStroke(10);
 
 
         /*
@@ -223,7 +230,7 @@ public class Main extends PApplet {
 
     public void draw() {
 
-        background(0);
+        background(20);
         stroke(255);
         strokeWeight(strokeWeightValue);
         rect(0, 0, 200, height);
@@ -250,6 +257,9 @@ public class Main extends PApplet {
                 case HEALED:
                     healedCounter++;
                     break;
+                case RISK:
+                    riskCounter++;
+                    break;
             }
         }
 
@@ -264,7 +274,7 @@ public class Main extends PApplet {
 
 
         infectedStatePoint.show();
-        infectedState.setText(infectedCounter + " Infiziert");
+        infectedState.setText(infectedCounter + " Infizierte");
         infectedCounter = 0;
 
         deadStatePoint.show();
@@ -274,6 +284,12 @@ public class Main extends PApplet {
         healedStatePoint.show();
         healedState.setText(healedCounter + " Geheilte");
         healedCounter = 0;
+
+        /*riskStatePoint.showCross();
+        riskState.setText("Ein dunkles kreuz bedeutet Person gehört zur Risikogruppe");
+        riskCounter = 0;*/
+
+
 
 
         /*

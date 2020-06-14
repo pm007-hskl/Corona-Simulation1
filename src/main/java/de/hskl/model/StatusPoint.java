@@ -103,5 +103,12 @@ public class StatusPoint {
         p.ellipse(xPos, yPos,  width, height);
     }
 
+    public void showCross() {
+        p.stroke(colorR, colorG, colorB);
+        p.ellipse(xPos, yPos,  width, height);
+        p.line(xPos - height / 2.0f, yPos, xPos + height / 2.0f, yPos);
+        p.line(xPos, yPos - height / 2.0f, xPos, yPos + height / 2.0f);
+    }
+
 
 }
