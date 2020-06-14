@@ -35,7 +35,7 @@
             <artifactId>G4P</artifactId>
             <scope>system</scope>
             <version>1.0</version>
-            <systemPath>${basedir}\src\lib\G4P.jar</systemPath>
+            <systemPath>${basedir}/src/lib/G4P.jar</systemPath>
         </dependency>
     </dependencies>
 
