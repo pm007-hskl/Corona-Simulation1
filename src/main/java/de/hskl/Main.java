@@ -66,7 +66,6 @@ public class Main extends PApplet {
     private float GuiPeopleAtRisk = 0.0f;
     public Person[] persons = new Person[100];
     public MaskDistanceController maskdistanceController = new MaskDistanceController(false, false);
-    public static GCustomSlider slider;
     public static GButton btnstart;
     public static GButton btnstop;
     public static GLabel healthyState;
@@ -78,7 +77,6 @@ public class Main extends PApplet {
     public static int infectedCounter = 0;
     public static int deadCounter = 0;
     public static int healedCounter = 0;
-    public static int riskCounter = 0;
     public static Font font = new Font("TimesRoman", Font.PLAIN, 16);
     public static int strokeWeightValue = 8; //dicke der Punkte definiert
     public static int frameCounter = 0; // Test feste Framerate
@@ -110,6 +108,10 @@ public class Main extends PApplet {
 
         btnstop = new GButton(this, 32, 50, 140, 20, "STOP");
         btnstop.setLocalColorScheme(GCScheme.RED_SCHEME);
+
+        /*
+        * Erstellen der Legende
+        * */
 
         healthyState = new GLabel(this, 25, 500, 200, 100);
         healthyState.setFont(font);
@@ -257,9 +259,6 @@ public class Main extends PApplet {
                 case HEALED:
                     healedCounter++;
                     break;
-                case RISK:
-                    riskCounter++;
-                    break;
             }
         }
 
@@ -284,12 +283,6 @@ public class Main extends PApplet {
         healedStatePoint.show();
         healedState.setText(healedCounter + " Geheilte");
         healedCounter = 0;
-
-        /*riskStatePoint.showCross();
-        riskState.setText("Ein dunkles kreuz bedeutet Person gehört zur Risikogruppe");
-        riskCounter = 0;*/
-
-
 
 
         /*
@@ -363,6 +356,7 @@ public class Main extends PApplet {
     /*
      * xxEvents stellt die Werte der Eingabe von der GUI bereit
      * */
+    
     public void handleButtonEvents(GButton button, GEvent event) {
         if (button == btnstart && event == GEvent.CLICKED) {
             persons = new Person[GuiNumPersonValue];
