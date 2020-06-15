@@ -45,6 +45,8 @@ import g4p_controls.*;
 import processing.core.PApplet;
 
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.IOException;
 
 import static de.hskl.model.HealthStatus.*;
 
@@ -58,7 +60,7 @@ public class Main extends PApplet {
     public static GCustomSlider peopleAtRisk;
     public static GCheckbox Mask;
     public static GCheckbox Distance;
-    private boolean masked = false;
+    private static boolean InfoOpened= false;
     private float GuiBasicReproductionRatioValue = 2.0f;
     private int GuiNumPersonValue = 100;
     private int GuiNumStartInfectionsValue = 4;
@@ -68,6 +70,8 @@ public class Main extends PApplet {
     public MaskDistanceController maskdistanceController = new MaskDistanceController(false, false);
     public static GButton btnstart;
     public static GButton btnstop;
+    public static GButton info;
+    public static GWindow infoWindow;
     public static GLabel healthyState;
     public static GLabel infectedState;
     public static GLabel deadState;
@@ -96,7 +100,7 @@ public class Main extends PApplet {
     }
 
     public void setup() {
-
+        surface.setTitle("Corona-Simulation");
         initialize();
 
         /*
@@ -109,29 +113,8 @@ public class Main extends PApplet {
         btnstop = new GButton(this, 32, 50, 140, 20, "STOP");
         btnstop.setLocalColorScheme(GCScheme.RED_SCHEME);
 
-        /*
-        * Erstellen der Legende
-        * */
 
-        healthyState = new GLabel(this, 25, 500, 200, 100);
-        healthyState.setFont(font);
-        healthyStatePoint = new StatusPoint(this, 0,247,0).setxPos(10).setyPos(550).setStroke(10);
 
-        infectedState = new GLabel(this, 25, 530, 200, 100);
-        infectedState.setFont(font);
-        infectedStatePoint = new StatusPoint(this, 255,255,0).setxPos(10).setyPos(580).setStroke(10);
-
-        deadState = new GLabel(this, 25, 560, 200, 100);
-        deadState.setFont(font);
-        deadStatePoint = new StatusPoint(this, 255,0,0).setxPos(10).setyPos(610).setStroke(10);
-
-        healedState = new GLabel(this, 25, 590, 200, 100);
-        healedState.setFont(font);
-        healedStatePoint = new StatusPoint(this, 0,51,255).setxPos(10).setyPos(640).setStroke(10);
-
-        riskState = new GLabel(this, 25, 620, 200, 100);
-        riskState.setFont(font);
-        riskStatePoint = new StatusPoint(this, 0,51,255).setxPos(10).setyPos(670).setStroke(10);
 
 
         /*
@@ -170,7 +153,36 @@ public class Main extends PApplet {
 
         Distance = GuiSettings.buildCheckboxForDistance(this, Distance);
         strokeWeight(strokeWeightValue);
-        //frameRate(30); // Test feste Framerate
+
+        /*
+         * Erstellen der Legende
+         * */
+
+        healthyState = new GLabel(this, 25, 500, 200, 100);
+        healthyState.setFont(font);
+        healthyStatePoint = new StatusPoint(this, 0,247,0).setxPos(10).setyPos(550).setStroke(10);
+
+        infectedState = new GLabel(this, 25, 530, 200, 100);
+        infectedState.setFont(font);
+        infectedStatePoint = new StatusPoint(this, 255,255,0).setxPos(10).setyPos(580).setStroke(10);
+
+        deadState = new GLabel(this, 25, 560, 200, 100);
+        deadState.setFont(font);
+        deadStatePoint = new StatusPoint(this, 255,0,0).setxPos(10).setyPos(610).setStroke(10);
+
+        healedState = new GLabel(this, 25, 590, 200, 100);
+        healedState.setFont(font);
+        healedStatePoint = new StatusPoint(this, 0,51,255).setxPos(10).setyPos(640).setStroke(10);
+
+        riskState = new GLabel(this, 25, 620, 200, 100);
+        riskState.setFont(font);
+        riskStatePoint = new StatusPoint(this, 0,51,255).setxPos(10).setyPos(670).setStroke(10);
+
+        info=new GButton(this,32,720,140,20,"INFO");
+
+        infoWindow = GWindow.getWindow(this, "Info zu Covid-19", 0, 0, 300, 300, JAVA2D);
+        infoWindow.addDrawHandler(this, "InfoHandler");
+        infoWindow.setVisible(false);
     }
 
 
@@ -363,6 +375,16 @@ public class Main extends PApplet {
                 persons[i].stopMotion();
             }
         }
+        if(button==info && event == GEvent.CLICKED){
+            if(InfoOpened==false) {
+                infoWindow.setVisible(true);
+                InfoOpened=true;
+            }else{
+                infoWindow.setVisible(false);
+                InfoOpened=false;
+            }
+
+        }
     }
 
     public void handleToggleControlEvents(GToggleControl box, GEvent event) {
@@ -378,6 +400,19 @@ public class Main extends PApplet {
             maskdistanceController.setMasked(false);
             maskdistanceController.setDistance(true);
         }
+    }
+
+    public void InfoHandler(PApplet p,GWinData data){
+        BufferedReader reader = createReader("CoV-19Info.txt");
+        String line = null;
+        /*try {
+            while ((line = reader.readLine()) != null) {
+                println(line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
     }
 
 }
