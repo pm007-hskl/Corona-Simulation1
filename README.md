@@ -41,7 +41,7 @@ Hier wird exemplarisch ein Mavenprojekt in dem Editor *Eclipse* geöffnet. Das V
 
 **1. Source Code als ZIP-Datei herunterladen**
 
-![](pictures/1.png) 
+![1](pictures/1.png) 
 
 
 
