@@ -31,7 +31,7 @@ import processing.core.PApplet;
 public class GuiSettings {
 
     /*
-     * Slider Settings
+     * erstellen der Slider
      * */
 
     public static GCustomSlider buildSliderForBasicReproductionRatio(PApplet p, GCustomSlider basicReproductionRatio) {
@@ -103,6 +103,9 @@ public class GuiSettings {
         return PeopleAtRisk;
     }
 
+    /*
+    * erstellen der Checkboxen für Masehnpflicht und Abstandsregelungen
+    * */
     public static GCheckbox buildCheckboxForMask(PApplet p, GCheckbox CheckboxForMask) {
         CheckboxForMask = new GCheckbox(p, 5, 440, 200, 15, "Maskenpflicht");
         return CheckboxForMask;
