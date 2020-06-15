@@ -36,45 +36,69 @@ public class AlgorithmInfection {
     }
 
 
-    //
     /*
-     *  Vergleicht 2 Personen innerhalb der Infektionsradius, ob diese sich gegenseitig anstecken
-     *  (eine Person muss gesund sein und die andere infiziert)
-     *  der Reproduktionsfaftor gibt mit an wie viele eine Person infizieren kann
+     *  Vergleicht 2 Personen die innerhalb des Infektionsradiuses sind. Eine infizierte Person kann eine gesunde
+     *  Person anstecken. Es können zusätzliche noch Attribute angewählt werden, wie Personen tragen alle Masken und
+     *  Personen halten sich die Abstandsregel
      * */
+
     public static void infect(Person[] persons, float basicReproductionRatioValue) {
-        int count = 0;
-        int count2 = 0;
+
         for (int i = 0; i < persons.length; i++) {
-            //wenn Maske nicht getragen wird, infizierung nach folgendem Algorithmus
-            //System.out.println(pers[i].isMasked()+" "+pers[i].isDistanceOK());
+
+            /*
+             * Sperzialfall: Personen tragen keine Masken und halten sich auch nicht an die Abstandreglung
+             * */
+
             if (persons[i].getCurrentHealthStatus() == HealthStatus.INFECTED && persons[i].isMasked() == false && persons[i].isDistanceOK() == false) {
-                //---- Übertragen der Krankheit auf eine andere Person?
+
+                /*
+                * Es wird jede Person mit jeder anderen Person verglichen und kontrolliert, ob sie andere Personen
+                * anstecken kann.
+                * */
+
                 for (int j = 0; j < persons.length; j++) {
 
                     if ((persons[i] != persons[j]) && (persons[j].getCurrentHealthStatus() == HealthStatus.HEALTHY)) {
 
                         if (personDistance(persons[i], persons[j]) < persons[j].getRadiusPerson()) {
+
+                            /*
+                            * Der Basisreproduktionsfaktor gibt an wie viele Personen von einem infizierten angesteckt werden können
+                            * */
 
                             if (persons[i].isAbleToInfect(basicReproductionRatioValue)) {
-                                System.out.println("normal called");
                                 persons[j].setCurrentHealthStatus(HealthStatus.INFECTED);
-
                             }
                         }
                     }
                 }
             }
-            //wenn Maske getragen wird, infefizierung nach folgendem Algorithmus
+
+
+            /*
+            * Sperzialfall: Personen tragen Masken und halten sich nicht an die Abstandreglung
+            * */
+
             if (persons[i].getCurrentHealthStatus() == HealthStatus.INFECTED && persons[i].isMasked() == true && persons[i].isDistanceOK() == false) {
-                //---- Übertragen der Krankheit auf eine andere Person?
+
+                /*
+                 * Es wird jede Person mit jeder anderen Person verglichen.
+                 * */
+
+                int ratioToInfectWithMask = 5; // Verhältnis von 1:5
+
                 for (int j = 0; j < persons.length; j++) {
 
                     if ((persons[i] != persons[j]) && (persons[j].getCurrentHealthStatus() == HealthStatus.HEALTHY)) {
 
                         if (personDistance(persons[i], persons[j]) < persons[j].getRadiusPerson()) {
 
-                            if (persons[i].isAbleToInfect(basicReproductionRatioValue) && (int) (Math.random() * 5) == 1) {
+                            /*
+                            * 
+                            * */
+
+                            if (persons[i].isAbleToInfect(basicReproductionRatioValue) && (int) (Math.random() * ratioToInfectWithMask) == 1) {
 
                                 persons[j].setCurrentHealthStatus(HealthStatus.INFECTED);
                             }
@@ -83,6 +107,11 @@ public class AlgorithmInfection {
                 }
 
             }
+
+
+            /*
+            * Spezialfall: Personen tragen keine Masken und halten sich denoch an die Abstandreglung
+            * */
 
             if (persons[i].getCurrentHealthStatus() == HealthStatus.INFECTED && persons[i].isMasked() == false && persons[i].isDistanceOK() == true) {
                 //---- Übertragen der Krankheit auf eine andere Person?
@@ -101,6 +130,11 @@ public class AlgorithmInfection {
                     }
                 }
             }
+
+            /*
+             * Spezialfall: Personen tragen Masken und halten sich auch an die Abstandreglung
+             * */
+
             //wenn Maske getragen wird, infefizierung nach folgendem Algorithmus
             if (persons[i].getCurrentHealthStatus() == HealthStatus.INFECTED && persons[i].isMasked() == true && persons[i].isDistanceOK() == true) {
                 //---- Übertragen der Krankheit auf eine andere Person?
