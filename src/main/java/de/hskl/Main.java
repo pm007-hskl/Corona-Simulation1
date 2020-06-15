@@ -27,7 +27,7 @@
  * Hier wird eine Technologie genutzt namens "Processing",
  * die spezialisiert ist auf die Erstellung von Grafiken, Simulationen und Animationen.
  * Die Technologie "Processing" ist im engeren Sinne eine Programmiersprache, die auf
- * JAVA basiert. Processing nutzt zum Zeichnen der Visualierungselemte drei Klassen:
+ * JAVA basiert. Processing nutzt zum Zeichnen der Visualierungselemente drei Klassen:
  * settings(), setup() und draw(), die hier in der "Main" Klasse zu finden sind.
  * Weiter Informationen hierzu findet man auf https://processing.org/.
  *
