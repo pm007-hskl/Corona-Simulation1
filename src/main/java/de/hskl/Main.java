@@ -68,8 +68,8 @@ public class Main extends PApplet {
     private static int GuiNumStartInfectionsValue = 4;
     private static float GuiDeathRatio = 1.0f;
     private static float GuiPeopleAtRisk = 0.0f;
-    public static Person[] persons = new Person[100];
-    public static MaskDistanceController maskdistanceController = new MaskDistanceController(false, false);
+    private static Person[] persons = new Person[100];
+    private static MaskDistanceController maskdistanceController = new MaskDistanceController(false, false);
     private static GButton btnstart;
     private static GButton btnstop;
     private static GButton info;
@@ -84,11 +84,11 @@ public class Main extends PApplet {
     private static int healedCounter = 0;
     private static Font font = new Font("TimesRoman", Font.PLAIN, 16);
     private static int strokeWeightValue = 8; //dicke der Punkte definiert
-    public static StatusPoint infectedStatePoint;
-    public static StatusPoint healthyStatePoint;
-    public static StatusPoint deadStatePoint;
-    public static StatusPoint healedStatePoint;
-    public static StatusPoint riskStatePoint;
+    private static StatusPoint infectedStatePoint;
+    private static StatusPoint healthyStatePoint;
+    private static StatusPoint deadStatePoint;
+    private static StatusPoint healedStatePoint;
+    private static StatusPoint riskStatePoint;
 
 
     public static void main(String[] args) {
@@ -270,7 +270,7 @@ public class Main extends PApplet {
             }
         }
         /*
-        * ruf den Algorithmus auf der für die Infektion gesunder Menschen verantwortlich ist
+        * ruft den Algorithmus auf der für die Infektion gesunder Menschen verantwortlich ist
         * */
         AlgorithmInfection.infect(persons, GuiBasicReproductionRatioValue);
 
