@@ -43,11 +43,10 @@ import de.hskl.model.Person;
 import de.hskl.view.GuiSettings;
 import g4p_controls.*;
 import processing.core.PApplet;
+import static javax.swing.JOptionPane.*;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-
+import java.io.*;
 import static de.hskl.model.HealthStatus.*;
 
 
@@ -61,6 +60,7 @@ public class Main extends PApplet {
     public static GCheckbox Mask;
     public static GCheckbox Distance;
     private static boolean InfoOpened= false;
+    private static boolean InfoIsstarted=false;
     private float GuiBasicReproductionRatioValue = 2.0f;
     private int GuiNumPersonValue = 100;
     private int GuiNumStartInfectionsValue = 4;
@@ -71,7 +71,6 @@ public class Main extends PApplet {
     public static GButton btnstart;
     public static GButton btnstop;
     public static GButton info;
-    public static GWindow infoWindow;
     public static GLabel healthyState;
     public static GLabel infectedState;
     public static GLabel deadState;
@@ -83,7 +82,6 @@ public class Main extends PApplet {
     public static int healedCounter = 0;
     public static Font font = new Font("TimesRoman", Font.PLAIN, 16);
     public static int strokeWeightValue = 8; //dicke der Punkte definiert
-    public static int frameCounter = 0; // Test feste Framerate
     public static StatusPoint infectedStatePoint;
     public static StatusPoint healthyStatePoint;
     public static StatusPoint deadStatePoint;
@@ -108,7 +106,7 @@ public class Main extends PApplet {
          * */
 
         btnstart = new GButton(this, 32, 20, 140, 20, "START");
-        btnstart.setLocalColorScheme(GCScheme.CYAN_SCHEME);
+        btnstart.setLocalColorScheme(GCScheme.GREEN_SCHEME);
 
         btnstop = new GButton(this, 32, 50, 140, 20, "STOP");
         btnstop.setLocalColorScheme(GCScheme.RED_SCHEME);
@@ -179,10 +177,8 @@ public class Main extends PApplet {
         riskStatePoint = new StatusPoint(this, 0,51,255).setxPos(10).setyPos(670).setStroke(10);
 
         info=new GButton(this,32,720,140,20,"INFO");
+        info.setLocalColorScheme(GCScheme.CYAN_SCHEME);
 
-        infoWindow = GWindow.getWindow(this, "Info zu Covid-19", 0, 0, 300, 300, JAVA2D);
-        infoWindow.addDrawHandler(this, "InfoHandler");
-        infoWindow.setVisible(false);
     }
 
 
@@ -376,13 +372,22 @@ public class Main extends PApplet {
             }
         }
         if(button==info && event == GEvent.CLICKED){
-            if(InfoOpened==false) {
-                infoWindow.setVisible(true);
-                InfoOpened=true;
-            }else{
-                infoWindow.setVisible(false);
-                InfoOpened=false;
+            String test="";
+            String line;
+            BufferedReader f = null;
+            try {
+                f = new BufferedReader(
+                        new FileReader(".\\src\\main\\java\\de\\hskl\\Covid.txt"));
+                while (true) {
+                    if (!((line = f.readLine()) != null)) break;
+                    test=test+" "+line+"\n";
+                }
+                f.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
+            showMessageDialog(null, test);
 
         }
     }
@@ -400,19 +405,6 @@ public class Main extends PApplet {
             maskdistanceController.setMasked(false);
             maskdistanceController.setDistance(true);
         }
-    }
-
-    public void InfoHandler(PApplet p,GWinData data){
-        BufferedReader reader = createReader("CoV-19Info.txt");
-        String line = null;
-        /*try {
-            while ((line = reader.readLine()) != null) {
-                println(line);
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
     }
 
 }

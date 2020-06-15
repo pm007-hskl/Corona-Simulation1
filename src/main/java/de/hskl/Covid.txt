@@ -1,0 +1,47 @@
+COVID-19 Die aus dem Coronavirus resultierende Lungenkrankheit heißt Covid-19.
+Die Verläufe der Krankheit sind laut Robert Koch-Institut unspezifisch, vielfältig und variieren stark, 
+von symptomlosen Verläufen bis zu schweren Pneumonien mit Lungenversagen und Tod. 
+Daher lassen sich keine allgemeingültigen Aussagen zum "typischen" Krankheitsverlauf machen.
+
+SARS-COV-2 Im Alltag und auch in der Berichterstattung in den Medien ist der Name Coronavirus gebräuchlich. Der offizielle Name des Virus, den die WHO festgelegt hat, lautet Sars-CoV-2.
+Laut Robert Koch-Institut scheint der Hauptübertragungsweg des Virus in der Bevölkerung die Tröpfcheninfektion zu sein. Theoretisch möglich ist auch eine Kontaktübertragung.
+
+Hyienemassnahmen:
+Durch diese Regeln kann jeder einzelne die Pandemie und ihren Verlauf mindern und sich vor einer Coronavirusinfektion schützen.
+Beispiele dazu sind Abstandsregelungen, Kontaktverbote, Berührungen vermeiden, Quarantäne, regelmäßiges Händewaschen und Mund-Nasen-Schutzkleidung.
+
+Risikogruppe Meint ältere oder vorerkrankte Menschen, bei denen ein schwerer Infektionsverlauf besonders wahrscheinlich ist. Das Risiko steigt ab einem Alter von 50 bis 60 Jahren stetig an.
+Grunderkrankungen wie Diabetes oder Herz-Kreislauf-Leiden verstärken es ebenfalls.
+
+Sterblichkeitsrate:
+Der Begriffe kommt aus der Demografie und bezeichnen jeweils die Anzahl der Todesfälle bezogen auf die Gesamtanzahl der Individuen
+oder - bei der spezifischen Sterberate - bezogen auf die Anzahl in der betreffenden Population, meist in einem bestimmten Zeitraum.
+
+Quaratäne:
+Damit ist die Isolierung von Erkrankten oder Infektionsverdächtigen gemeint. Vor der Corona-Krise meist eher mit Reflexionen über historische Seuchen
+oder Zollformalitäten beim Import von Tieren verbunden, ist sie heute das Schicksal Zehntausender Menschen. Infizierte und deren Kontaktpersonen müssen sich in häusliche Quarantäne begeben.
+Auch wird allgemein von jedem Bürger eine weitgehende Selbstisolierung in Form des sogenannten Social Distancing verlangt.
+
+Reproduktionfaktor:
+Die Reproduktionszahl besagt, wie viele weitere Menschen ein Infizierter ansteckt. Sie wird häufig auch Ansteckungsrate genannt.
+Sie zeigt an, wie häufig das Coronavirus durch bereits Infizierte weitergegeben wird. Die Ansteckungswahrscheinlichkeit hängt dabei stark von unserem Verhalten ab.
+
+Exponentielles Wachstum:
+beschreibt Änderungsprozesse, bei denen sich ein Wert in gleichen (zeitlichen) Abständen immer um denselben Faktor ändert.
+
+Inkubationszeit:
+Die Inkubationszeit beschreibt die Zeit vom Tag der Ansteckung bis zu dem Tag, an dem sich erste Symptome zeigen.
+Beim Coronavirus gehen die Wissenschafter inzwischen von einer Inkubationszeit von 5 bis 6 Tagen aus. Diese 5 bis 6 Tage sind aber ein Mittelwert.
+Einige wenige Patienten weisen sogar erst nach bis zu 14 Tagen nach der Ansteckung Symptome auf. An diese Werte angelehnt sind die gängigen Isolations- und Quarantäne-Empfehlungen von 14 Tagen.
+
+FFP-Masken:
+Für pflegerische Tätigkeiten oder andere Situationen, in denen Menschen engen Kontakt zu Influenza- oder Covid-19-Verdachtsfällen haben,
+wird ein einfacher Gesichtsschutz eigentlich als ungeeignet eingestuft. Dafür gibt es Masken mit der Schutzstufe FFP-2, die bestimmte Anforderungen zum Filtern von Partikeln erfüllen müssen.
+Sie sind beispielsweise wichtig für den Einsatz in Krankenhäusern, damit sich das Personal nicht infiziert. Geregelt sind die Anforderungen an solche Masken in der europäischen Norm 149;
+FFP steht für "filtering facepiece".
+
+
+Quelle:
+https://www.infektionsschutz.de/coronavirus/schutz-durch-hygiene.html
+https://www.tagesschau.de/inland/corona-pandemie-glossar-101.html
+https://www.nzz.ch/visuals/coronavirus-diese-20-begriffe-rund-um-covid-19-muessen-sie-kennen-ld.1553235
