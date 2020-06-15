@@ -61,8 +61,6 @@ public class Main extends PApplet {
     private static GCustomSlider peopleAtRisk;
     private static GCheckbox Mask;
     private static GCheckbox Distance;
-    private static boolean InfoOpened = false;
-    private static boolean InfoIsstarted = false;
     private static float GuiBasicReproductionRatioValue = 2.0f;
     private static int GuiNumPersonValue = 100;
     private static int GuiNumStartInfectionsValue = 4;
