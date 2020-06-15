@@ -2,6 +2,11 @@ package de.hskl.model;
 
 import processing.core.PApplet;
 
+/*
+ * Die StatusPoint Klasse generiert die Punkte die sich in der Simulation umherbewegen und die verschiedenen Personen darstellen.
+ * Durch verschiedene Farben werden die unterschiedlichen Zustände dargestellt.
+ * Durch Kreuze wird die Risikogruppe dargestellt.
+ */
 
 public class StatusPoint {
     private PApplet p;
@@ -97,8 +102,12 @@ public class StatusPoint {
         this.width = stroke;
         return this;
     }
-
+/*
+ * Stellt die unterschiedlichen Punkte dar.
+ * Legt Größe und Farbe der Punkte fest.
+ */
     public void show() {
+
         p.strokeWeight(1);
         p.stroke(colorR, colorG, colorB);
         p.fill(colorR, colorG, colorB);
@@ -106,7 +115,9 @@ public class StatusPoint {
         p.fill(255);
         p.strokeWeight(8);
     }
-
+/*
+ * Generiert Kreuze in den Punkten für Personen der Risikogruppe
+ */
     public void showAtRisk() {
         p.stroke(colorR, colorG, colorB);
         p.strokeWeight(2);
@@ -114,13 +125,6 @@ public class StatusPoint {
         p.line(xPos, yPos - height / 2.0f, xPos, yPos + height / 2.0f);
         p.strokeWeight(8);
         p.fill(255);
-    }
-
-    public void showCross() {
-        p.stroke(colorR, colorG, colorB);
-        p.ellipse(xPos, yPos, width, height);
-        p.line(xPos - height / 2.0f, yPos, xPos + height / 2.0f, yPos);
-        p.line(xPos, yPos - height / 2.0f, xPos, yPos + height / 2.0f);
     }
 
 
