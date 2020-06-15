@@ -99,21 +99,26 @@ public class StatusPoint {
     }
 
     public void show() {
+        p.strokeWeight(1);
         p.stroke(colorR, colorG, colorB);
-        p.fill(colorR,colorG,colorB);
-        p.ellipse(xPos, yPos,  width, height);
+        p.fill(colorR, colorG, colorB);
+        p.ellipse(xPos, yPos, width, height);
         p.fill(255);
+        p.strokeWeight(8);
     }
-    public void showAtRisk(){
-        p.stroke(colorR,colorG,colorB);
-        p.fill(colorR,colorG,colorB);
-        p.line(xPos-width/2.0f,yPos,xPos+width/2.0f,yPos);
+
+    public void showAtRisk() {
+        p.stroke(colorR, colorG, colorB);
+        p.strokeWeight(2);
+        p.line(xPos - width / 2.0f, yPos, xPos + width / 2.0f, yPos);
+        p.line(xPos, yPos - height / 2.0f, xPos, yPos + height / 2.0f);
+        p.strokeWeight(8);
         p.fill(255);
     }
 
     public void showCross() {
         p.stroke(colorR, colorG, colorB);
-        p.ellipse(xPos, yPos,  width, height);
+        p.ellipse(xPos, yPos, width, height);
         p.line(xPos - height / 2.0f, yPos, xPos + height / 2.0f, yPos);
         p.line(xPos, yPos - height / 2.0f, xPos, yPos + height / 2.0f);
     }

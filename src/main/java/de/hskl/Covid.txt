@@ -1,16 +1,17 @@
-COVID-19 Die aus dem Coronavirus resultierende Lungenkrankheit heißt Covid-19.
-Die Verläufe der Krankheit sind laut Robert Koch-Institut unspezifisch, vielfältig und variieren stark, 
-von symptomlosen Verläufen bis zu schweren Pneumonien mit Lungenversagen und Tod. 
-Daher lassen sich keine allgemeingültigen Aussagen zum "typischen" Krankheitsverlauf machen.
+COVID-19:
+Die aus dem Coronavirus resultierende Lungenkrankheit heißt Covid-19. Die Verläufe der Krankheit sind laut Robert Koch-Institut unspezifisch, vielfältig und variieren stark,
+von symptomlosen Verläufen bis zu schweren Pneumonien mit Lungenversagen und Tod. Daher lassen sich keine allgemeingültigen Aussagen zum "typischen" Krankheitsverlauf machen.
 
-SARS-COV-2 Im Alltag und auch in der Berichterstattung in den Medien ist der Name Coronavirus gebräuchlich. Der offizielle Name des Virus, den die WHO festgelegt hat, lautet Sars-CoV-2.
+SARS-COV-2:
+Im Alltag und auch in der Berichterstattung in den Medien ist der Name Coronavirus gebräuchlich. Der offizielle Name des Virus, den die WHO festgelegt hat, lautet Sars-CoV-2.
 Laut Robert Koch-Institut scheint der Hauptübertragungsweg des Virus in der Bevölkerung die Tröpfcheninfektion zu sein. Theoretisch möglich ist auch eine Kontaktübertragung.
 
 Hyienemassnahmen:
 Durch diese Regeln kann jeder einzelne die Pandemie und ihren Verlauf mindern und sich vor einer Coronavirusinfektion schützen.
 Beispiele dazu sind Abstandsregelungen, Kontaktverbote, Berührungen vermeiden, Quarantäne, regelmäßiges Händewaschen und Mund-Nasen-Schutzkleidung.
 
-Risikogruppe Meint ältere oder vorerkrankte Menschen, bei denen ein schwerer Infektionsverlauf besonders wahrscheinlich ist. Das Risiko steigt ab einem Alter von 50 bis 60 Jahren stetig an.
+Risikogruppe:
+Meint ältere oder vorerkrankte Menschen, bei denen ein schwerer Infektionsverlauf besonders wahrscheinlich ist. Das Risiko steigt ab einem Alter von 50 bis 60 Jahren stetig an.
 Grunderkrankungen wie Diabetes oder Herz-Kreislauf-Leiden verstärken es ebenfalls.
 
 Sterblichkeitsrate:
@@ -18,7 +19,7 @@ Der Begriffe kommt aus der Demografie und bezeichnen jeweils die Anzahl der Tode
 oder - bei der spezifischen Sterberate - bezogen auf die Anzahl in der betreffenden Population, meist in einem bestimmten Zeitraum.
 
 Quaratäne:
-Damit ist die Isolierung von Erkrankten oder Infektionsverdächtigen gemeint. Vor der Corona-Krise meist eher mit Reflexionen über historische Seuchen
+Damit ist die Isolation von Erkrankten oder Infektionsverdächtigen gemeint. Vor der Corona-Krise meist eher mit Reflexionen über historische Seuchen
 oder Zollformalitäten beim Import von Tieren verbunden, ist sie heute das Schicksal Zehntausender Menschen. Infizierte und deren Kontaktpersonen müssen sich in häusliche Quarantäne begeben.
 Auch wird allgemein von jedem Bürger eine weitgehende Selbstisolierung in Form des sogenannten Social Distancing verlangt.
 
@@ -27,7 +28,7 @@ Die Reproduktionszahl besagt, wie viele weitere Menschen ein Infizierter ansteck
 Sie zeigt an, wie häufig das Coronavirus durch bereits Infizierte weitergegeben wird. Die Ansteckungswahrscheinlichkeit hängt dabei stark von unserem Verhalten ab.
 
 Exponentielles Wachstum:
-beschreibt Änderungsprozesse, bei denen sich ein Wert in gleichen (zeitlichen) Abständen immer um denselben Faktor ändert.
+Beschreibt Änderungsprozesse, bei denen sich ein Wert in gleichen (zeitlichen) Abständen immer um denselben Faktor ändert.
 
 Inkubationszeit:
 Die Inkubationszeit beschreibt die Zeit vom Tag der Ansteckung bis zu dem Tag, an dem sich erste Symptome zeigen.

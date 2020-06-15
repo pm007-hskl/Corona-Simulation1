@@ -22,16 +22,16 @@
  * */
 
 /*
-* Beschreibung
-*
-* Hier wird eine Technologie genutzt namens "Processing",
-* die spezialisiert ist auf die Erstellung von Grafiken, Simulationen und Animationen.
-* Die Technologie "Processing" ist im engeren Sinne eine Programmiersprache, die auf
-* JAVA basiert. Processing nutzt zum Zeichnen der Visualierungselemte drei Klassen:
-* settings(), setup() und draw(), die hier in der "Main" Klasse zu finden sind.
-* Weiter Informationen hierzu findet man auf https://processing.org/.
-*
-* */
+ * Beschreibung
+ *
+ * Hier wird eine Technologie genutzt namens "Processing",
+ * die spezialisiert ist auf die Erstellung von Grafiken, Simulationen und Animationen.
+ * Die Technologie "Processing" ist im engeren Sinne eine Programmiersprache, die auf
+ * JAVA basiert. Processing nutzt zum Zeichnen der Visualierungselemte drei Klassen:
+ * settings(), setup() und draw(), die hier in der "Main" Klasse zu finden sind.
+ * Weiter Informationen hierzu findet man auf https://processing.org/.
+ *
+ * */
 
 package de.hskl;
 
@@ -43,10 +43,12 @@ import de.hskl.model.Person;
 import de.hskl.view.GuiSettings;
 import g4p_controls.*;
 import processing.core.PApplet;
+
 import static javax.swing.JOptionPane.*;
 
 import java.awt.*;
 import java.io.*;
+
 import static de.hskl.model.HealthStatus.*;
 
 
@@ -59,8 +61,8 @@ public class Main extends PApplet {
     public static GCustomSlider peopleAtRisk;
     public static GCheckbox Mask;
     public static GCheckbox Distance;
-    private static boolean InfoOpened= false;
-    private static boolean InfoIsstarted=false;
+    private static boolean InfoOpened = false;
+    private static boolean InfoIsstarted = false;
     private float GuiBasicReproductionRatioValue = 2.0f;
     private int GuiNumPersonValue = 100;
     private int GuiNumStartInfectionsValue = 4;
@@ -158,25 +160,26 @@ public class Main extends PApplet {
 
         healthyState = new GLabel(this, 25, 500, 200, 100);
         healthyState.setFont(font);
-        healthyStatePoint = new StatusPoint(this, 0,247,0).setxPos(10).setyPos(550).setStroke(10);
+        healthyStatePoint = new StatusPoint(this, 0, 247, 0).setxPos(10).setyPos(550).setStroke(10);
 
         infectedState = new GLabel(this, 25, 530, 200, 100);
         infectedState.setFont(font);
-        infectedStatePoint = new StatusPoint(this, 255,255,0).setxPos(10).setyPos(580).setStroke(10);
+        infectedStatePoint = new StatusPoint(this, 255, 255, 0).setxPos(10).setyPos(580).setStroke(10);
 
         deadState = new GLabel(this, 25, 560, 200, 100);
         deadState.setFont(font);
-        deadStatePoint = new StatusPoint(this, 255,0,0).setxPos(10).setyPos(610).setStroke(10);
+        deadStatePoint = new StatusPoint(this, 255, 0, 0).setxPos(10).setyPos(610).setStroke(10);
 
         healedState = new GLabel(this, 25, 590, 200, 100);
         healedState.setFont(font);
-        healedStatePoint = new StatusPoint(this, 0,51,255).setxPos(10).setyPos(640).setStroke(10);
+        healedStatePoint = new StatusPoint(this, 0, 51, 255).setxPos(10).setyPos(640).setStroke(10);
 
         riskState = new GLabel(this, 25, 620, 200, 100);
         riskState.setFont(font);
-        riskStatePoint = new StatusPoint(this, 0,51,255).setxPos(10).setyPos(670).setStroke(10);
+        riskStatePoint = new StatusPoint(this, 0, 0, 0).setxPos(10).setyPos(670).setStroke(10);
 
-        info=new GButton(this,32,720,140,20,"INFO");
+
+        info = new GButton(this, 32, 720, 140, 20, "INFO");
         info.setLocalColorScheme(GCScheme.CYAN_SCHEME);
 
     }
@@ -206,7 +209,6 @@ public class Main extends PApplet {
                 persons[i].setCurrentHealthStatus(INFECTED);
             }
         }
-
 
 
         float AbsPeopleAtRisk = (GuiPeopleAtRisk / 100.0f) * (float) GuiNumPersonValue;
@@ -288,6 +290,9 @@ public class Main extends PApplet {
         healedState.setText(healedCounter + " Geheilte");
         healedCounter = 0;
 
+        riskStatePoint.showAtRisk();
+        riskState.setText("In Risikogruppe");
+
 
         /*
          * DayTime-Simulator: zählt die Frames, um den Reproduktionsfaktor zu visualisieren
@@ -360,7 +365,7 @@ public class Main extends PApplet {
     /*
      * xxEvents stellt die Werte der Eingabe von der GUI bereit
      * */
-    
+
     public void handleButtonEvents(GButton button, GEvent event) {
         if (button == btnstart && event == GEvent.CLICKED) {
             persons = new Person[GuiNumPersonValue];
@@ -371,8 +376,8 @@ public class Main extends PApplet {
                 persons[i].stopMotion();
             }
         }
-        if(button==info && event == GEvent.CLICKED){
-            String test="";
+        if (button == info && event == GEvent.CLICKED) {
+            String test = "";
             String line;
             BufferedReader f = null;
             try {
@@ -380,7 +385,7 @@ public class Main extends PApplet {
                         new FileReader(".\\src\\main\\java\\de\\hskl\\Covid.txt"));
                 while (true) {
                     if (!((line = f.readLine()) != null)) break;
-                    test=test+" "+line+"\n";
+                    test = test + " " + line + "\n";
                 }
                 f.close();
             } catch (IOException e) {

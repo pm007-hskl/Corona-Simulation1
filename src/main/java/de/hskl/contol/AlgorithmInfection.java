@@ -57,7 +57,7 @@ public class AlgorithmInfection {
                         if (personDistance(persons[i], persons[j]) < persons[j].getRadiusPerson()) {
 
                             if (persons[i].isAbleToInfect(basicReproductionRatioValue)) {
-                                //System.out.println("normal called");
+                                System.out.println("normal called");
                                 persons[j].setCurrentHealthStatus(HealthStatus.INFECTED);
 
                             }
@@ -111,7 +111,6 @@ public class AlgorithmInfection {
                         if (personDistance(persons[i], persons[j]) < persons[j].getRadiusPerson()) {
 
                             if (persons[i].isAbleToInfect(basicReproductionRatioValue) && (int) (Math.random() * 15) == 1) {
-                                System.out.println((int) Math.random() * 10);
                                 persons[j].setCurrentHealthStatus(HealthStatus.INFECTED);
 
                             }
