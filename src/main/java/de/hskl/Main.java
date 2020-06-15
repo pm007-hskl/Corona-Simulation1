@@ -83,7 +83,7 @@ public class Main extends PApplet {
     private static int deadCounter = 0;
     private static int healedCounter = 0;
     private static Font font = new Font("TimesRoman", Font.PLAIN, 16);
-    private static int strokeWeightValue = 8; //dicke der Punkte definiert
+    private static int strokeWeightValue = 8; // dicke der Punkte definiert
     private static StatusPoint infectedStatePoint;
     private static StatusPoint healthyStatePoint;
     private static StatusPoint deadStatePoint;
@@ -100,7 +100,7 @@ public class Main extends PApplet {
     }
 
     public void setup() {
-        surface.setTitle("Corona-Simulation");
+        surface.setTitle("PM007 - Corona-Simulation");
         initialize();
 
         /*
@@ -112,8 +112,6 @@ public class Main extends PApplet {
 
         btnstop = new GButton(this, 32, 50, 140, 20, "STOP");
         btnstop.setLocalColorScheme(GCScheme.RED_SCHEME);
-
-
 
 
 
@@ -154,6 +152,7 @@ public class Main extends PApplet {
         Distance = GuiSettings.buildCheckboxForDistance(this, Distance);
         strokeWeight(strokeWeightValue);
 
+
         /*
          * Erstellen der Legende
          * */
@@ -177,6 +176,7 @@ public class Main extends PApplet {
         riskState = new GLabel(this, 25, 620, 200, 100);
         riskState.setFont(font);
         riskStatePoint = new StatusPoint(this, 0, 0, 0).setxPos(10).setyPos(670).setStroke(10);
+
         /*
         * Info-Knopf erstellen
         * */
@@ -246,13 +246,19 @@ public class Main extends PApplet {
         rect(0, 0, 200, height);
 
 
-        // Person anzeigen und Bewegung berechnen
+        /*
+        * Person anzeigen und Bewegung berechnen
+        */
+
         for (int i = 0; i < persons.length; i++) {
             persons[i].move();
             persons[i].show();
         }
 
-        //Zählt bei jedem durchlauf die Anzahl toter,gesunder,geheilter und infizierter Menschen
+        /*
+        * Zählt bei jedem Durchlauf die Anzahl toter, gesunder, geheilter und infizierter Menschen
+        */
+
         for (int i = 0; i < persons.length; i++) {
             switch (persons[i].getCurrentHealthStatus()) {
                 case HEALTHY:
@@ -269,14 +275,18 @@ public class Main extends PApplet {
                     break;
             }
         }
+
         /*
-        * ruft den Algorithmus auf der für die Infektion gesunder Menschen verantwortlich ist
+        * Ruft den Algorithmus auf der für die Infektion gesunder Menschen verantwortlich ist
         * */
+
         AlgorithmInfection.infect(persons, GuiBasicReproductionRatioValue);
+
 
         /*
          * Gui Werte aktualiseren
          * */
+
         healthyStatePoint.show();
         healthyState.setText(healthyCounter + " Gesunde");
         healthyCounter = 0;
@@ -340,7 +350,7 @@ public class Main extends PApplet {
 
 
     /*
-     * wird nur bei Änderung der Slider ausgeführt,
+     * Wird nur bei Änderung der Slider ausgeführt,
      * dies übernimmt Processing von selbst
      * */
 
@@ -364,7 +374,7 @@ public class Main extends PApplet {
 
 
     /*
-     * handhabt die Button Events für STOP, START und INFO
+     * Handhabt die Buttons für die Events für STOP, START und INFO
      * */
 
     public void handleButtonEvents(GButton button, GEvent event) {
@@ -383,7 +393,7 @@ public class Main extends PApplet {
             BufferedReader f = null;
             try {
                 f = new BufferedReader(
-                        new FileReader(".\\src\\main\\java\\de\\hskl\\Covid.txt"));
+                        new FileReader(".\\src\\main\\java\\de\\hskl\\resources\\msgCovidInformation.txt"));
                 while (true) {
                     if (!((line = f.readLine()) != null)) break;
                     test = test + " " + line + "\n";
@@ -398,9 +408,11 @@ public class Main extends PApplet {
         }
     }
 
+
     /*
-    * handhabt die Checkboxen für Maseknpflicht und Abstandsregelungen
+    * Handhabt die Checkboxen für Maskenpflicht und Abstandsregelung
     * */
+
     public void handleToggleControlEvents(GToggleControl box, GEvent event) {
         if (Mask.isSelected() == true && Distance.isSelected() == false) {
             maskdistanceController.setMasked(true);
@@ -415,5 +427,4 @@ public class Main extends PApplet {
             maskdistanceController.setDistance(true);
         }
     }
-
 }
