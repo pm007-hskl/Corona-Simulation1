@@ -100,7 +100,9 @@ public class StatusPoint {
 
     public void show() {
         p.stroke(colorR, colorG, colorB);
+        p.fill(colorR,colorG,colorB);
         p.ellipse(xPos, yPos,  width, height);
+        p.fill(255);
     }
 
     public void showCross() {

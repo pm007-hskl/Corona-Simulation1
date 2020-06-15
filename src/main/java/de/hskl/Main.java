@@ -145,23 +145,23 @@ public class Main extends PApplet {
 
 
         GGroup groupOfLabelNumPerson = new GGroup(this);
-        GLabel labelNumPerson = new GLabel(this, 25, 145, 200, 45, "Gesamtanzahl der Personen");
+        GLabel labelNumPerson = new GLabel(this, 25, 135, 200, 45, "Gesamtanzahl der Personen");
         numPerson = GuiSettings.buildSliderForNumberPerson(this, numPerson);
         groupOfLabelReprRatio.addControls(labelNumPerson, numPerson);
 
 
         GGroup groupOfLabelNumStartInfects = new GGroup(this);
-        GLabel labelNumInfects = new GLabel(this, 20, 215, 200, 45, "Anzahl der Infizierte am Anfang");
+        GLabel labelNumInfects = new GLabel(this, 20, 205, 200, 45, "Anzahl der Infizierte am Anfang");
         numStartInfections = GuiSettings.buildSliderForNumberStartInfects(this, numStartInfections);
         groupOfLabelReprRatio.addControls(labelNumInfects, numStartInfections);
 
         GGroup groupOfLabelDeathRatio = new GGroup(this);
-        GLabel labelDeathRation = new GLabel(this, 45, 285, 200, 45, "Sterblichkeitsrate in %");
+        GLabel labelDeathRation = new GLabel(this, 45, 275, 200, 45, "Sterblichkeitsrate in %");
         deathratio = GuiSettings.buildSliderForDeathratio(this, deathratio);
         groupOfLabelDeathRatio.addControls(labelDeathRation, deathratio);
 
         GGroup groupOfLabelPeopleAtRisk = new GGroup(this);
-        GLabel labelPeopleAtRisk = new GLabel(this, 37, 355, 200, 45, "Risikogruppenanteil in %");
+        GLabel labelPeopleAtRisk = new GLabel(this, 37, 345, 200, 45, "Risikogruppenanteil in %");
         peopleAtRisk = GuiSettings.buildSliderForPeopleAtRisk(this, peopleAtRisk);
         groupOfLabelPeopleAtRisk.addControls(labelPeopleAtRisk, peopleAtRisk);
         strokeWeight(1);
@@ -373,17 +373,14 @@ public class Main extends PApplet {
         if (Mask.isSelected() == true && Distance.isSelected() == false) {
             maskdistanceController.setMasked(true);
             maskdistanceController.setDistance(false);
-            System.out.println("called 1 0");
         }
         if (Mask.isSelected() == true && Distance.isSelected() == true) {
             maskdistanceController.setMasked(true);
             maskdistanceController.setDistance(true);
-            System.out.println("called 1 1");
         }
         if (Mask.isSelected() == false && Distance.isSelected() == true) {
             maskdistanceController.setMasked(false);
             maskdistanceController.setDistance(true);
-            System.out.println("called 0 1");
         }
     }
 
