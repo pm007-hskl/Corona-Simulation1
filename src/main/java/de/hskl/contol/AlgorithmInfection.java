@@ -26,8 +26,8 @@ package de.hskl.contol;
 
 import de.hskl.model.HealthStatus;
 import de.hskl.model.Person;
-
 import static processing.core.PApplet.dist;
+
 
 public class AlgorithmInfection {
 
@@ -44,6 +44,26 @@ public class AlgorithmInfection {
 
     public static void infect(Person[] persons, float basicReproductionRatioValue) {
 
+        /*
+         * Verhältnis von 1:5 (20%), um mit einer Maske angesteckt zu werden
+         * */
+
+        int ratioToInfectWithMask = 5;
+
+
+        /*
+         * Verhältnis von 1:7 (14.7 Prozent), um von einer Person, die sich an die Abstandsreglung hält infizert zu werden.
+         * */
+
+        int ratioToInfectPeopleWithDistance = 7;
+
+
+
+        /*
+         * Es wird jede Person mit jeder anderen Person verglichen und kontrolliert, ob sie andere Personen
+         * anstecken kann.
+         * */
+
         for (int i = 0; i < persons.length; i++) {
 
             /*
@@ -52,10 +72,7 @@ public class AlgorithmInfection {
 
             if (persons[i].getCurrentHealthStatus() == HealthStatus.INFECTED && persons[i].isMasked() == false && persons[i].isDistanceOK() == false) {
 
-                /*
-                * Es wird jede Person mit jeder anderen Person verglichen und kontrolliert, ob sie andere Personen
-                * anstecken kann.
-                * */
+
 
                 for (int j = 0; j < persons.length; j++) {
 
@@ -82,11 +99,6 @@ public class AlgorithmInfection {
 
             if (persons[i].getCurrentHealthStatus() == HealthStatus.INFECTED && persons[i].isMasked() == true && persons[i].isDistanceOK() == false) {
 
-                /*
-                 * Es wird jede Person mit jeder anderen Person verglichen.
-                 * */
-
-                int ratioToInfectWithMask = 5; // Verhältnis von 1:5
 
                 for (int j = 0; j < persons.length; j++) {
 
@@ -95,7 +107,9 @@ public class AlgorithmInfection {
                         if (personDistance(persons[i], persons[j]) < persons[j].getRadiusPerson()) {
 
                             /*
-                            * 
+                            * Es wird mit einer Wahrscheinlichkeit geprüft, ob sich die Person anstecken kann
+                            * Es wird eine Zahl erzeugt die kleiner ist als ratioToInfectWithMask und danach
+                            * auf eine ganze Zahl gerundet, falls diese 1 ist kann sich die Person infizieren.
                             * */
 
                             if (persons[i].isAbleToInfect(basicReproductionRatioValue) && (int) (Math.random() * ratioToInfectWithMask) == 1) {
@@ -114,39 +128,55 @@ public class AlgorithmInfection {
             * */
 
             if (persons[i].getCurrentHealthStatus() == HealthStatus.INFECTED && persons[i].isMasked() == false && persons[i].isDistanceOK() == true) {
-                //---- Übertragen der Krankheit auf eine andere Person?
+
                 for (int j = 0; j < persons.length; j++) {
 
                     if ((persons[i] != persons[j]) && (persons[j].getCurrentHealthStatus() == HealthStatus.HEALTHY)) {
 
                         if (personDistance(persons[i], persons[j]) < persons[j].getRadiusPerson()) {
 
-                            if (persons[i].isAbleToInfect(basicReproductionRatioValue) && (int) (Math.random() * 7) == 1) {
+                            /*
+                             * Es wird mit einer Wahrscheinlichkeit geprüft, ob sich die Person anstecken kann.
+                             * Es wird eine Zahl erzeugt die kleiner ist als ratioToInfectPeopleWithDistance und danach
+                             * auf eine ganze Zahl gerundet, falls diese 1 ist kann sich die Person infizieren.
+                             * */
+
+                            if (persons[i].isAbleToInfect(basicReproductionRatioValue) && (int) (Math.random() * ratioToInfectPeopleWithDistance) == 1) {
 
                                 persons[j].setCurrentHealthStatus(HealthStatus.INFECTED);
-
                             }
                         }
                     }
                 }
             }
 
+
             /*
              * Spezialfall: Personen tragen Masken und halten sich auch an die Abstandreglung
              * */
 
-            //wenn Maske getragen wird, infefizierung nach folgendem Algorithmus
             if (persons[i].getCurrentHealthStatus() == HealthStatus.INFECTED && persons[i].isMasked() == true && persons[i].isDistanceOK() == true) {
-                //---- Übertragen der Krankheit auf eine andere Person?
+
+
                 for (int j = 0; j < persons.length; j++) {
 
                     if ((persons[i] != persons[j]) && (persons[j].getCurrentHealthStatus() == HealthStatus.HEALTHY)) {
 
                         if (personDistance(persons[i], persons[j]) < persons[j].getRadiusPerson()) {
 
-                            if (persons[i].isAbleToInfect(basicReproductionRatioValue) && (int) (Math.random() * 15) == 1) {
-                                persons[j].setCurrentHealthStatus(HealthStatus.INFECTED);
+                            /*
+                             * Es wird mit einer Wahrscheinlichkeit geprüft, ob sich die Person anstecken kann.
+                             * Es wird eine Zahl erzeugt die kleiner ist als ratioToInfectPeopleWithDistance und danach
+                             * auf eine ganze Zahl gerundet, falls diese 1 ist kann sich die Person infizieren.
+                             * Zusätzlich wird eine Zahl erzeugt die kleiner ist als ratioToInfectWithMask und danach
+                             * auf eine ganze Zahl gerundet, falls diese 1 ist kann sich die Person infizieren.
+                             * */
 
+                            if ((persons[i].isAbleToInfect(basicReproductionRatioValue))
+                                && ((int) (Math.random() * ratioToInfectPeopleWithDistance) == 1)
+                                && ((int) (Math.random() * ratioToInfectWithMask) == 1)) {
+
+                                persons[j].setCurrentHealthStatus(HealthStatus.INFECTED);
                             }
                         }
                     }

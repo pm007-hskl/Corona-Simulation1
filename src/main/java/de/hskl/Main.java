@@ -54,41 +54,41 @@ import static de.hskl.model.HealthStatus.*;
 
 public class Main extends PApplet {
 
-    public static GCustomSlider basicReproductionRatio;
-    public static GCustomSlider numPerson;
-    public static GCustomSlider numStartInfections;
-    public static GCustomSlider deathratio;
-    public static GCustomSlider peopleAtRisk;
-    public static GCheckbox Mask;
-    public static GCheckbox Distance;
+    private static GCustomSlider basicReproductionRatio;
+    private static GCustomSlider numPerson;
+    private static GCustomSlider numStartInfections;
+    private static GCustomSlider deathratio;
+    private static GCustomSlider peopleAtRisk;
+    private static GCheckbox Mask;
+    private static GCheckbox Distance;
     private static boolean InfoOpened = false;
     private static boolean InfoIsstarted = false;
-    private float GuiBasicReproductionRatioValue = 2.0f;
-    private int GuiNumPersonValue = 100;
-    private int GuiNumStartInfectionsValue = 4;
-    private float GuiDeathRatio = 1.0f;
-    private float GuiPeopleAtRisk = 0.0f;
-    public Person[] persons = new Person[100];
-    public MaskDistanceController maskdistanceController = new MaskDistanceController(false, false);
-    public static GButton btnstart;
-    public static GButton btnstop;
-    public static GButton info;
-    public static GLabel healthyState;
-    public static GLabel infectedState;
-    public static GLabel deadState;
-    public static GLabel healedState;
-    public static GLabel riskState;
-    public static int healthyCounter = 0;
-    public static int infectedCounter = 0;
-    public static int deadCounter = 0;
-    public static int healedCounter = 0;
-    public static Font font = new Font("TimesRoman", Font.PLAIN, 16);
-    public static int strokeWeightValue = 8; //dicke der Punkte definiert
-    public static StatusPoint infectedStatePoint;
-    public static StatusPoint healthyStatePoint;
-    public static StatusPoint deadStatePoint;
-    public static StatusPoint healedStatePoint;
-    public static StatusPoint riskStatePoint;
+    private static float GuiBasicReproductionRatioValue = 2.0f;
+    private static int GuiNumPersonValue = 100;
+    private static int GuiNumStartInfectionsValue = 4;
+    private static float GuiDeathRatio = 1.0f;
+    private static float GuiPeopleAtRisk = 0.0f;
+    private static Person[] persons = new Person[100];
+    private static MaskDistanceController maskdistanceController = new MaskDistanceController(false, false);
+    private static GButton btnstart;
+    private static GButton btnstop;
+    private static GButton info;
+    private static GLabel healthyState;
+    private static GLabel infectedState;
+    private static GLabel deadState;
+    private static GLabel healedState;
+    private static GLabel riskState;
+    private static int healthyCounter = 0;
+    private static int infectedCounter = 0;
+    private static int deadCounter = 0;
+    private static int healedCounter = 0;
+    private static Font font = new Font("TimesRoman", Font.PLAIN, 16);
+    private static int strokeWeightValue = 8; //dicke der Punkte definiert
+    private static StatusPoint infectedStatePoint;
+    private static StatusPoint healthyStatePoint;
+    private static StatusPoint deadStatePoint;
+    private static StatusPoint healedStatePoint;
+    private static StatusPoint riskStatePoint;
 
 
     public static void main(String[] args) {
@@ -177,7 +177,9 @@ public class Main extends PApplet {
         riskState = new GLabel(this, 25, 620, 200, 100);
         riskState.setFont(font);
         riskStatePoint = new StatusPoint(this, 0, 0, 0).setxPos(10).setyPos(670).setStroke(10);
-
+        /*
+        * Info-Knopf erstellen
+        * */
 
         info = new GButton(this, 32, 720, 140, 20, "INFO");
         info.setLocalColorScheme(GCScheme.CYAN_SCHEME);
@@ -187,7 +189,7 @@ public class Main extends PApplet {
 
     /*
      * Jede Änderung des Sliders führt zu einer Neuinitialisierung der Werte
-     * dies muss mit dem Startbutton bestötigt werden
+     * dies muss mit dem Startbutton bestätigt werden
      * */
 
     private void initialize() {
@@ -244,7 +246,7 @@ public class Main extends PApplet {
         rect(0, 0, 200, height);
 
 
-        // Person anzeigen und bewegung berechnen
+        // Person anzeigen und Bewegung berechnen
         for (int i = 0; i < persons.length; i++) {
             persons[i].move();
             persons[i].show();
@@ -267,7 +269,9 @@ public class Main extends PApplet {
                     break;
             }
         }
-
+        /*
+        * ruft den Algorithmus auf der für die Infektion gesunder Menschen verantwortlich ist
+        * */
         AlgorithmInfection.infect(persons, GuiBasicReproductionRatioValue);
 
         /*
@@ -326,7 +330,7 @@ public class Main extends PApplet {
                     persons[i].setIsSafe(true);
                 }
 
-                //nach 700 Frames sind sie wieder geheilt, falls sie nicht bereits tot sind
+                //nach 700 Frames sind die Infizierten sie wieder geheilt, falls sie nicht bereits tot sind
                 if (persons[i].getDaysOfInfection() >= 700) {
                     persons[i].setCurrentHealthStatus(HEALED);
                 }
@@ -336,22 +340,19 @@ public class Main extends PApplet {
 
 
     /*
-     * handleSliderEvents wird nur bei Änderung der Werte ausgeführt,
+     * wird nur bei Änderung der Slider ausgeführt,
      * dies übernimmt Processing von selbst
      * */
 
     public void handleSliderEvents(GValueControl slider, GEvent event) {
         if (slider == basicReproductionRatio) {
             GuiBasicReproductionRatioValue = MathUtil.roundOneDigit(slider.getValueF());
-            //System.out.println("Reproduktionszahl: " + basicReproductionRatioValue);
         }
         if (slider == numPerson) {
             GuiNumPersonValue = slider.getValueI();
-            //System.out.println("Anzahl Personen: " + numPersonValue);
         }
         if (slider == numStartInfections) {
             GuiNumStartInfectionsValue = slider.getValueI();
-            //System.out.println("Anzahl Start Infizierte" + numStartInfectionsValue);
         }
         if (slider == deathratio) {
             GuiDeathRatio = MathUtil.roundOneDigit(slider.getValueF());
@@ -363,7 +364,7 @@ public class Main extends PApplet {
 
 
     /*
-     * xxEvents stellt die Werte der Eingabe von der GUI bereit
+     * handhabt die Button Events für STOP, START und INFO
      * */
 
     public void handleButtonEvents(GButton button, GEvent event) {
@@ -397,6 +398,9 @@ public class Main extends PApplet {
         }
     }
 
+    /*
+    * handhabt die Checkboxen für Maseknpflicht und Abstandsregelungen
+    * */
     public void handleToggleControlEvents(GToggleControl box, GEvent event) {
         if (Mask.isSelected() == true && Distance.isSelected() == false) {
             maskdistanceController.setMasked(true);

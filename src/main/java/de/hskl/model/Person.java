@@ -216,7 +216,6 @@ public class Person {
         daysCounter = 0;
         canInfect = true;
         infectCounter = 0;
-        //isSafe = false;
     }
 
 
