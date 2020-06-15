@@ -221,11 +221,7 @@ public class Main extends PApplet {
                 }
             }
         }
-        for (int i = 0; i < persons.length; i++) {
-            if (persons[i].getCurrentHealthStatus() == INFECTED) {
-                System.out.println(persons[i].isMasked() + " " + persons[i].isDistanceOK());
-            }
-        }
+
 
     }
 
