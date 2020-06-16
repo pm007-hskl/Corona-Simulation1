@@ -33,8 +33,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+## Installationsanweisung um ein Mavenprojekt zum Deploy
+### Mit Docker
+`docker run -it --rm --name pm007 -v "$(pwd)":/usr/src/pm007 -w /usr/src/pm007 maven mvn install:install-file -Dfile=src/lib/G4P.jar -DgroupId=G4P -DartifactId=G4P -Dversion=1.0 -Dpackaging=jar clean package`
 
+Ausführbare Jar-Datei in _target/PM007-1.0-SNAPSHOT-jar-with-dependencies.jar_
 
+### Direkt mit Maven
+G4P als lokales Maven Repo installieren:  
+`mvn install:install-file -Dfile=src/lib/G4P.jar -DgroupId=G4P -DartifactId=G4P -Dversion=1.0 -Dpackaging=jar`
+
+Dann Projekt mit `mvn package` bauen.
+
+Ausführbare Jar-Datei in _target/PM007-1.0-SNAPSHOT-jar-with-dependencies.jar_
 
 ## Installationsanweisung um ein Mavenprojekt zu starten
 Hier wird exemplarisch ein Mavenprojekt in dem Editor *Eclipse* geöffnet. Das Vorgehen kann in anderen Editoren etwas unterschiedlich sein.
